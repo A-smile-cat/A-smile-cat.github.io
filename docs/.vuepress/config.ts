@@ -29,10 +29,14 @@ export default defineUserConfig({
   theme: hopeTheme({
     // 导航栏
     navbar: [
-      { text: "首页", link: "/" },
       { text: "快捷导航", link: "/navigation/" },
-      { text: "博客", link: "/blog/" },
-      { text: "笔记", link: "/notes/" },
+      { text: "学习笔记", link: "/notes/" },
+      { text: "计算机知识库", link: "/blog/" },
+      { text: "AI 技术专栏", link: "/ai-tech/" },
+      { text: "AI 应用技术专栏", link: "/ai-app/" },
+      { text: "研究中心", link: "/research/" },
+      { text: "娱乐场", link: "/entertainment/" },
+      { text: "关于我", link: "/about/" },
     ],
 
     // 侧边栏

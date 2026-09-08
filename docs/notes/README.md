@@ -1,5 +1,5 @@
 ---
-title: 笔记
+title: 学习笔记
 index: false
 dir:
   order: 2

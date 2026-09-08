@@ -1,8 +1,8 @@
 ---
-title: 博客
+title: 计算机知识库
 index: false
 dir:
-  order: 1
+  order: 3
 ---
 
-这里是博客文章列表。
+这里是计算机知识库，收录技术文章与学习记录。
