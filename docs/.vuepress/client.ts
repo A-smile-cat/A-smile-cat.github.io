@@ -4,10 +4,10 @@ import { onMounted } from "vue";
 import "./styles/custom.scss";
 
 const taglines = [
+  "一只敲代码时会碎碎念的程序喵 🐱",
   "热爱技术，享受编码的乐趣 💻",
   "持续学习，不断成长 🚀",
   "用代码改变世界 ✨",
-  "记录学习，分享技术 📝",
 ];
 
 /** 打字机动画 */
