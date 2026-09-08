@@ -66,61 +66,57 @@ const initTypingEffect = () => {
   setTimeout(type, 1500);
 };
 
-/** busuanzi 访问计数 */
-const initBusuanzi = () => {
-  // 注入 busuanzi 脚本
+/** 注入页脚：2 行 2 栏网格 */
+const injectFooter = () => {
+  const wrapper = document.querySelector(".vp-footer-wrapper");
+  if (!wrapper) return;
+
+  const origFooter = wrapper.querySelector(".vp-footer") as HTMLElement;
+  const origCopyright = wrapper.querySelector(".vp-copyright") as HTMLElement;
+
+  // 隐藏原元素
+  if (origFooter) origFooter.style.display = "none";
+  if (origCopyright) origCopyright.style.display = "none";
+
+  // 建站日期 🎯 改成你自己的
+  const startDate = new Date("2024-01-01T00:00:00");
+
+  const grid = document.createElement("div");
+  grid.className = "footer-grid";
+  grid.innerHTML = `
+    <div class="footer-cell footer-stats">
+      <span id="busuanzi_container_site_pv" style="display:none">本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+      <span id="busuanzi_container_site_uv" style="display:none"> | 本站访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+    </div>
+    <div class="footer-cell footer-powered">
+      ${origFooter ? origFooter.innerHTML : 'Powered by <a href="https://v2.vuepress.vuejs.org/zh/" target="_blank">VuePress</a> | Theme <a href="https://theme-hope.vuejs.press/zh/" target="_blank">Hope</a>'}
+    </div>
+    <div class="footer-cell footer-uptime"></div>
+    <div class="footer-cell footer-copyright">
+      ${origCopyright ? origCopyright.innerHTML : "Copyright © 2024 - present A-smile-cat"}
+    </div>
+  `;
+
+  wrapper.insertBefore(grid, wrapper.firstChild);
+
+  // 运行时间计时器
+  const uptimeEl = grid.querySelector(".footer-uptime")!;
+  const updateUptime = () => {
+    const diff = Date.now() - startDate.getTime();
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    uptimeEl.textContent = `本站已运行 ${d} 天 ${h} 小时 ${m} 分钟 ${s} 秒`;
+  };
+  updateUptime();
+  setInterval(updateUptime, 1000);
+
+  // busuanzi 脚本
   const script = document.createElement("script");
   script.async = true;
   script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
   document.head.appendChild(script);
-};
-
-/** 站点运行时间计时器 */
-const initUptime = () => {
-  // 🎯 建站日期，改成你自己的
-  const startDate = new Date("2024-01-01T00:00:00");
-
-  const uptimeEl = document.createElement("div");
-  uptimeEl.className = "site-uptime";
-
-  const updateUptime = () => {
-    const now = new Date();
-    const diff = now.getTime() - startDate.getTime();
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    uptimeEl.textContent = `本站已运行 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
-  };
-
-  updateUptime();
-  setInterval(updateUptime, 1000);
-  return uptimeEl;
-};
-
-/** 将自定义信息注入页脚 */
-const injectFooterInfo = () => {
-  const footerWrapper = document.querySelector(".vp-footer-wrapper");
-  if (!footerWrapper) return;
-
-  // busuanzi 访问统计
-  const statsEl = document.createElement("div");
-  statsEl.className = "busuanzi-stats";
-  statsEl.innerHTML = `
-    <span id="busuanzi_container_site_pv" style="display:none">
-      本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    <span id="busuanzi_container_site_uv" style="display:none">
-       | 本站访客数 <span id="busuanzi_value_site_uv"></span> 人次
-    </span>
-  `;
-  footerWrapper.insertBefore(statsEl, footerWrapper.firstChild);
-
-  // 站点运行时间
-  const uptimeEl = initUptime();
-  footerWrapper.insertBefore(uptimeEl, statsEl.nextSibling);
 };
 
 export default defineClientConfig({
@@ -128,8 +124,7 @@ export default defineClientConfig({
     onMounted(() => {
       setTimeout(() => {
         initTypingEffect();
-        initBusuanzi();
-        injectFooterInfo();
+        injectFooter();
       }, 500);
     });
   },

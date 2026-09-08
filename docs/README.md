@@ -5,7 +5,7 @@ title: A-smile-cat
 heroImage: /logo.svg
 heroImageDark: /logo.svg
 heroText: A-smile-cat
-tagline: 世界和平
+tagline: 一只敲代码时会碎碎念的程序喵
 heroFullScreen: true
 bgImage: /hero-bg.jpg
 bgImageDark: /hero-bg.jpg

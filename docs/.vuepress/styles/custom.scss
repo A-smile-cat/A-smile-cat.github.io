@@ -48,15 +48,20 @@ html.dark {
   }
 }
 
-// 遮罩层增强对比度
-.vp-blog-hero-mask,
-[class*="hero"] [class*="mask"] {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.45) 100%
-  ) !important;
+// 遮罩层增强对比度（用伪元素，不覆盖 background 属性，避免吃掉背景图）
+.vp-blog-mask {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+    pointer-events: none;
+  }
 }
 
 // Hero 内容入场动画
@@ -162,6 +167,32 @@ html.dark {
   }
 }
 
+/* ===== 修复 SkipLink 自动 focus 导致左上角重叠 ===== */
+.vp-skip-link {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+
+  // 只有用户用 Tab 键聚焦时才显示
+  &:focus {
+    position: fixed !important;
+    width: auto !important;
+    height: auto !important;
+    clip: auto !important;
+    clip-path: none !important;
+    padding: 0.65rem 1.5rem !important;
+    margin: 0 !important;
+    z-index: 9999;
+  }
+}
+
 /* ===== 功能特性卡片增强 ===== */
 .vp-feature-item,
 [class*="feature"] [class*="item"] {
@@ -173,31 +204,24 @@ html.dark {
   }
 }
 
-/* ===== 页脚样式 ===== */
+/* ===== 页脚样式：2 行 2 栏网格 ===== */
 .vp-footer-wrapper {
-  .busuanzi-stats {
-    padding: 0.5rem 0;
+  padding: 1.5rem 2rem;
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    text-align: center;
     font-size: 0.85rem;
     color: var(--text-color-light, #888);
-    text-align: center;
-
-    span {
-      margin: 0 2px;
-    }
   }
 
-  .site-uptime {
-    padding: 0.3rem 0 0.8rem;
-    font-size: 0.8rem;
-    color: var(--text-color-lighter, #aaa);
-    text-align: center;
-  }
-
-  .vp-footer {
-    padding: 0.8rem 0;
-    font-size: 0.85rem;
-    color: var(--text-color-light, #666);
-    text-align: center;
+  .footer-cell {
+    padding: 0.3rem 0;
 
     a {
       color: var(--theme-color, #3eaf7c);
@@ -210,10 +234,25 @@ html.dark {
     }
   }
 
+  .footer-stats {
+    text-align: right;
+  }
+
+  .footer-powered {
+    text-align: left;
+  }
+
+  .footer-uptime {
+    text-align: right;
+  }
+
+  .footer-copyright {
+    text-align: left;
+  }
+
+  // 隐藏原元素（由 JS 控制）
+  .vp-footer,
   .vp-copyright {
-    padding: 0.5rem 0 1rem;
-    font-size: 0.8rem;
-    color: var(--text-color-lighter, #999);
-    text-align: center;
+    display: none;
   }
 }
