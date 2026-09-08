@@ -281,13 +281,15 @@ $nav-accents: (
 
 .nav-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.6rem;
   margin: 0.5rem 0 1.5rem;
 
   .vp-card {
     max-width: none;
     margin: 0;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.4rem;
     border-inline-start: 4px solid var(--nav-accent, transparent);
     background: var(--vp-c-control);
     background: color-mix(
@@ -312,10 +314,27 @@ $nav-accents: (
     }
   }
 
-  // 让 favicon 圆标更清晰耐看
+  // 缩小 favicon 圆标
   .vp-card-logo {
-    padding: 3px;
+    width: 2rem;
+    height: 2rem;
+    margin-inline-end: 0.6rem;
+    padding: 2px;
     background: var(--vp-c-bg);
     border: 1px solid var(--vp-c-border);
+  }
+
+  // 收紧标题与描述间距、缩小分隔线
+  .vp-card-title {
+    font-size: 0.95rem;
+  }
+
+  hr {
+    margin: 0.15em 0;
+  }
+
+  .vp-card-desc {
+    font-size: 0.82rem;
+    line-height: 1.4;
   }
 }
