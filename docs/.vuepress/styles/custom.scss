@@ -257,7 +257,28 @@ html.dark {
   }
 }
 
-/* ===== 导航页卡片网格 ===== */
+/* ===== 导航页卡片网格：分类配色 ===== */
+
+// 每个分类的主题色（想改颜色就改这里的色值）
+$nav-accents: (
+  "cat-blue": #4e8ff7, // 在线课程
+  "cat-green": #34b37e, // 学习教程
+  "cat-orange": #f0883e, // 技术社区
+  "cat-cyan": #29b3c3, // 开发工具
+  "cat-pink": #e8659f, // 设计资源
+  "cat-red": #e5484d, // 技术资讯
+  "cat-amber": #d9a514, // 效率工具
+  "cat-violet": #8e6bf1, // 写作与博客
+  "cat-sky": #38a3e0, // 云服务与 API
+  "cat-teal": #14b8a6, // 在线服务
+);
+
+@each $name, $color in $nav-accents {
+  .nav-grid.#{$name} {
+    --nav-accent: #{$color};
+  }
+}
+
 .nav-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -267,5 +288,34 @@ html.dark {
   .vp-card {
     max-width: none;
     margin: 0;
+    border-inline-start: 4px solid var(--nav-accent, transparent);
+    background: var(--vp-c-control);
+    background: color-mix(
+      in srgb,
+      var(--nav-accent, var(--vp-c-control)) 6%,
+      var(--vp-c-bg)
+    );
+    transition:
+      background var(--vp-t-color),
+      box-shadow var(--vp-t-transform),
+      transform 0.3s ease;
+
+    &:hover {
+      background: var(--vp-c-control-hover);
+      background: color-mix(
+        in srgb,
+        var(--nav-accent, var(--vp-c-control)) 14%,
+        var(--vp-c-bg)
+      );
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+  }
+
+  // 让 favicon 圆标更清晰耐看
+  .vp-card-logo {
+    padding: 3px;
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-border);
   }
 }
