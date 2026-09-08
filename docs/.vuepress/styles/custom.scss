@@ -175,8 +175,26 @@ html.dark {
 
 /* ===== 页脚样式 ===== */
 .vp-footer-wrapper {
+  .busuanzi-stats {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    color: var(--text-color-light, #888);
+    text-align: center;
+
+    span {
+      margin: 0 2px;
+    }
+  }
+
+  .site-uptime {
+    padding: 0.3rem 0 0.8rem;
+    font-size: 0.8rem;
+    color: var(--text-color-lighter, #aaa);
+    text-align: center;
+  }
+
   .vp-footer {
-    padding: 1rem 0;
+    padding: 0.8rem 0;
     font-size: 0.85rem;
     color: var(--text-color-light, #666);
     text-align: center;
