@@ -5,7 +5,7 @@ title: A-smile-cat
 heroImage: /logo.svg
 heroImageDark: /logo.svg
 heroText: A-smile-cat
-tagline: 热爱技术，享受编码的乐趣 💻
+tagline: 世界和平
 heroFullScreen: true
 bgImage: /hero-bg.jpg
 bgImageDark: /hero-bg.jpg
@@ -19,15 +19,16 @@ actions:
     link: /notes/
 
 features:
-  - title: ✍️ 博客
-    details: 记录日常学习和技术总结
-    link: /blog/
-  - title: 📚 笔记
-    details: 学习过程中的知识整理
-    link: /notes/
-  - title: 🐙 GitHub
-    details: 我的开源项目
-    link: https://github.com/A-smile-cat
+  - title: JavaGuide
+    details: Java面试 + 学习指南
+    link: https://javaguide.cn/
+  - title: 小林coding
+    details: 计算机基础
+    link: https://www.xiaolincoding.com/
+  - title: Leetcode
+    details: 力扣
+    link: https://leetcode.cn/
 
-footer: 使用 VuePress + vuepress-theme-hope 构建
+footer: Powered by VuePress | Theme Hope
+copyright: Copyright © 2024 - present A-smile-cat
 ---

@@ -15,11 +15,10 @@ export default defineClientConfig({
     onMounted(() => {
       // 等待 DOM 渲染完成
       setTimeout(() => {
-        const taglineEl = document.querySelector(".vp-hero-tagline, .tagline, [class*='tagline']") as HTMLElement;
+        const taglineEl = document.querySelector(
+          ".vp-hero-tagline, .tagline, [class*='tagline']"
+        ) as HTMLElement;
         if (!taglineEl) return;
-
-        // 保存原始文本用于初始化
-        const originalText = taglineEl.textContent || taglines[0];
 
         let currentIndex = 0;
         let charIndex = 0;
@@ -31,8 +30,12 @@ export default defineClientConfig({
 
         // 创建打字机容器
         taglineEl.innerHTML = `<span class="typed-text"></span><span class="typed-cursor">|</span>`;
-        const typedSpan = taglineEl.querySelector(".typed-text") as HTMLSpanElement;
-        const cursorSpan = taglineEl.querySelector(".typed-cursor") as HTMLSpanElement;
+        const typedSpan = taglineEl.querySelector(
+          ".typed-text"
+        ) as HTMLSpanElement;
+        const cursorSpan = taglineEl.querySelector(
+          ".typed-cursor"
+        ) as HTMLSpanElement;
 
         const type = () => {
           if (isWaiting) return;

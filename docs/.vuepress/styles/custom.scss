@@ -1,3 +1,27 @@
+/* ===== 全局字体：霞鹜文楷 ===== */
+:root {
+  --font-family-base: "LXGW WenKai Screen", "PingFang SC", "Microsoft YaHei",
+    sans-serif !important;
+}
+
+html,
+body,
+.vp-navbar,
+.vp-sidebar,
+.vp-content,
+.vp-footer,
+.vp-page,
+h1, h2, h3, h4, h5, h6,
+p, span, a, li, td, th, div {
+  font-family: "LXGW WenKai Screen", "PingFang SC", "Microsoft YaHei",
+    sans-serif !important;
+}
+
+/* 代码块保持等宽字体 */
+code, pre, kbd, samp {
+  font-family: "Fira Code", "JetBrains Mono", Consolas, monospace !important;
+}
+
 /* ===== 首屏 Hero 区域增强 ===== */
 
 // 背景图缓慢缩放动画
@@ -104,7 +128,8 @@ html.dark {
 }
 
 @keyframes cursorBlink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -128,7 +153,8 @@ html.dark {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -144,5 +170,32 @@ html.dark {
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ===== 页脚样式 ===== */
+.vp-footer-wrapper {
+  .vp-footer {
+    padding: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--text-color-light, #666);
+    text-align: center;
+
+    a {
+      color: var(--theme-color, #3eaf7c);
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .vp-copyright {
+    padding: 0.5rem 0 1rem;
+    font-size: 0.8rem;
+    color: var(--text-color-lighter, #999);
+    text-align: center;
   }
 }

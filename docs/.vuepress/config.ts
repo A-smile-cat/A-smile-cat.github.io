@@ -11,6 +11,21 @@ export default defineUserConfig({
   title: "A-smile-cat",
   description: "A-smile-cat 的个人网站",
 
+  // 霞鹜文楷字体
+  head: [
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.css",
+        integrity:
+          "sha512-A2sVEqmNCGCac7ji4czWLqCVSn28L0U5lSobS173H+gk+QTV6rH0EH0QEnYk5mz3KPRDmEr+GKM1hfdfLrsFpg==",
+        crossorigin: "anonymous",
+        referrerpolicy: "no-referrer",
+      },
+    ],
+  ],
+
   theme: hopeTheme({
     // 导航栏
     navbar: [
@@ -31,12 +46,15 @@ export default defineUserConfig({
     ],
 
     // 页脚
-    footer: "默认页脚",
+    footer:
+      'Powered by <a href="https://v2.vuepress.vuejs.org/zh/" target="_blank"> VuePress </a> | Theme <a href="https://theme-hope.vuejs.press/zh/" target="_blank"> Hope </a>',
     displayFooter: true,
+    copyright: "Copyright © 2024 - present A-smile-cat",
 
     // 博客配置
     blog: {
-      description: "一个热爱技术的开发者",
+      name: "A-smile-cat",
+      description: "热爱技术的开发者",
       intro: "/intro.html",
       medias: {
         GitHub: "https://github.com/A-smile-cat",
