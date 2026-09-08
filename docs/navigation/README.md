@@ -5,11 +5,17 @@ icon: fa-solid fa-star
 
 # 快捷导航
 
-收藏常用网站，提高效率 🚀
-
 ---
 
 ## 📚 学习平台
+
+### 视频学习平台
+
+- [超星](https://passport2.chaoxing.com/login?fid=&newversion=true&refer=https://i.chaoxing.com) - 超星学习通
+- https://www.icourses.cn/home/ - 爱课程
+- https://www.icourse163.org/ - 中国大学MOOC网
+- [慕课网](https://www.imooc.com/) - IT 职业技能平台
+- [学习强国](https://www.xuexi.cn/lgpage/detail/index.html?id=11414757761631561215) - 学习强国
 
 - [GitHub](https://github.com/) - 全球最大代码托管平台
 - [LeetCode](https://leetcode.cn/) - 算法刷题
@@ -19,8 +25,8 @@ icon: fa-solid fa-star
 - [掘金](https://juejin.cn/) - 技术社区
 - [CSDN](https://www.csdn.net/) - 开发者社区
 - [知乎](https://www.zhihu.com/) - 问答社区
-- [慕课网](https://www.imooc.com/) - IT 职业技能平台
-- [B站编程区](https://search.bilibili.com/all?keyword=编程) - 视频教程
+- [educoder](https://www.educoder.net) - 头歌实践教学平台
+- 
 
 ---
 
