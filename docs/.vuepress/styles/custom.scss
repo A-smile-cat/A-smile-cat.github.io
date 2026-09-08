@@ -1,0 +1,148 @@
+/* ===== 首屏 Hero 区域增强 ===== */
+
+// 背景图缓慢缩放动画
+.vp-blog-hero-bg,
+[class*="blog-hero"] [class*="bg"],
+[class*="hero"] [class*="bg"] {
+  animation: bgZoom 20s ease-in-out infinite alternate !important;
+}
+
+html.dark {
+  .vp-blog-hero-bg,
+  [class*="blog-hero"] [class*="bg"],
+  [class*="hero"] [class*="bg"] {
+    filter: brightness(0.6);
+  }
+}
+
+@keyframes bgZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+// 遮罩层增强对比度
+.vp-blog-hero-mask,
+[class*="hero"] [class*="mask"] {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.45) 100%
+  ) !important;
+}
+
+// Hero 内容入场动画
+.vp-blog-hero-info,
+[class*="hero"] [class*="info"] {
+  animation: fadeInUp 1s ease both;
+}
+
+.vp-blog-hero-image,
+[class*="hero"] img {
+  animation: fadeInDown 1s ease 0.2s both;
+  border-radius: 50% !important;
+  border: 3px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.vp-blog-hero-title,
+[class*="hero"] [class*="title"],
+[class*="hero"] h1 {
+  animation: fadeInUp 1s ease 0.3s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.vp-blog-hero-tagline,
+[class*="hero"] [class*="tagline"],
+[class*="hero"] .tagline {
+  animation: fadeInUp 1s ease 0.5s both;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3) !important;
+  min-height: 1.8rem;
+}
+
+[class*="hero"] [class*="actions"],
+[class*="hero"] .actions {
+  animation: fadeInUp 1s ease 0.7s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== 打字机光标 ===== */
+.typed-cursor {
+  font-weight: 300;
+  color: var(--theme-color);
+  margin-left: 2px;
+  animation: cursorBlink 0.8s infinite;
+
+  &.blink {
+    animation: cursorBlink 0.5s infinite;
+  }
+}
+
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.typed-text {
+  letter-spacing: 0.05em;
+}
+
+/* ===== 向下滚动提示 ===== */
+[class*="hero"] [class*="drop"] {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s;
+  animation: bounce 2s ease-in-out infinite;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* ===== 功能特性卡片增强 ===== */
+.vp-feature-item,
+[class*="feature"] [class*="item"] {
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
