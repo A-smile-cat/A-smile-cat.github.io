@@ -1,5 +1,6 @@
 import { defineClientConfig } from "vuepress/client";
-import { onMounted } from "vue";
+import { onMounted, onUnmounted, watch } from "vue";
+import { useRoute } from "vuepress/client";
 
 import "./styles/custom.scss";
 
@@ -10,27 +11,34 @@ const taglines = [
   "用代码改变世界 ✨",
 ];
 
-/** 打字机动画 */
-const initTypingEffect = () => {
-  const taglineEl = document.querySelector(
-    ".vp-hero-tagline, .tagline, [class*='tagline']"
-  ) as HTMLElement;
-  if (!taglineEl) return;
+/**
+ * 打字机动画
+ * 返回清理函数；元素未找到时返回 null（由调用方重试）。
+ */
+const startTypingEffect = (): (() => void) | null => {
+  // BlogHome 布局的标语类名是 .vp-blog-hero-description（theme-hope BlogHero 组件）
+  // 普通首页布局则是 #main-description，这里一并兼容
+  const taglineEl = document.querySelector<HTMLElement>(
+    ".vp-blog-hero-description, #main-description, .vp-hero-tagline, .tagline"
+  );
+  if (!taglineEl) return null;
+
+  // 已经初始化过（如 SPA 返回首页时元素被复用）
+  if (taglineEl.querySelector(".typed-text")) return () => {};
 
   let currentIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let isWaiting = false;
-  const typeSpeed = 100;
-  const deleteSpeed = 60;
-  const waitTime = 2000;
+  let timer = 0;
+  let stopped = false;
 
   taglineEl.innerHTML = `<span class="typed-text"></span><span class="typed-cursor">|</span>`;
   const typedSpan = taglineEl.querySelector(".typed-text") as HTMLSpanElement;
   const cursorSpan = taglineEl.querySelector(".typed-cursor") as HTMLSpanElement;
 
   const type = () => {
-    if (isWaiting) return;
+    // SPA 路由切换后元素已从文档移除时停止
+    if (stopped || !typedSpan.isConnected) return;
     const current = taglines[currentIndex];
 
     if (!isDeleting) {
@@ -38,17 +46,15 @@ const initTypingEffect = () => {
       charIndex++;
 
       if (charIndex === current.length) {
-        isWaiting = true;
         cursorSpan.classList.add("blink");
-        setTimeout(() => {
-          isWaiting = false;
+        timer = window.setTimeout(() => {
           cursorSpan.classList.remove("blink");
           isDeleting = true;
           type();
-        }, waitTime);
+        }, 2000);
         return;
       }
-      setTimeout(type, typeSpeed);
+      timer = window.setTimeout(type, 100);
     } else {
       typedSpan.textContent = current.substring(0, charIndex - 1);
       charIndex--;
@@ -56,20 +62,26 @@ const initTypingEffect = () => {
       if (charIndex === 0) {
         isDeleting = false;
         currentIndex = (currentIndex + 1) % taglines.length;
-        setTimeout(type, 500);
+        timer = window.setTimeout(type, 500);
         return;
       }
-      setTimeout(type, deleteSpeed);
+      timer = window.setTimeout(type, 60);
     }
   };
 
-  setTimeout(type, 1500);
+  timer = window.setTimeout(type, 1500);
+
+  return () => {
+    stopped = true;
+    window.clearTimeout(timer);
+  };
 };
 
 /** 注入页脚：2 行 2 栏网格 */
 const injectFooter = () => {
   const wrapper = document.querySelector(".vp-footer-wrapper");
   if (!wrapper) return;
+  if (wrapper.querySelector(".footer-grid")) return; // 避免重复注入
 
   const origFooter = wrapper.querySelector(".vp-footer") as HTMLElement;
   const origCopyright = wrapper.querySelector(".vp-copyright") as HTMLElement;
@@ -121,11 +133,52 @@ const injectFooter = () => {
 
 export default defineClientConfig({
   setup() {
+    const route = useRoute();
+
+    let stopTyping: (() => void) | null = null;
+    let retryTimer = 0;
+    let stopWatch: (() => void) | undefined;
+
+    /** 轮询等待 Hero 渲染完成后再启动动画（页面 chunk 可能异步加载） */
+    const startWithRetry = () => {
+      stopTyping?.();
+      stopTyping = null;
+      window.clearInterval(retryTimer);
+
+      let attempts = 0;
+      retryTimer = window.setInterval(() => {
+        if (++attempts > 25) {
+          window.clearInterval(retryTimer);
+          return;
+        }
+        stopTyping = startTypingEffect();
+        if (stopTyping) window.clearInterval(retryTimer);
+      }, 200);
+    };
+
     onMounted(() => {
-      setTimeout(() => {
-        initTypingEffect();
-        injectFooter();
-      }, 500);
+      startWithRetry();
+      injectFooter();
+
+      // SPA 路由切换：离开首页时停止动画，回到首页时重新启动
+      stopWatch = watch(
+        () => route.path,
+        (path) => {
+          if (path === "/" || path === "/index.html") {
+            startWithRetry();
+          } else {
+            window.clearInterval(retryTimer);
+            stopTyping?.();
+            stopTyping = null;
+          }
+        }
+      );
+    });
+
+    onUnmounted(() => {
+      stopWatch?.();
+      window.clearInterval(retryTimer);
+      stopTyping?.();
     });
   },
 });
