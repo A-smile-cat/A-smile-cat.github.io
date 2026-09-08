@@ -136,6 +136,33 @@ title: 快捷导航
 
 </div>
 
+## 🌍 英语相关
+
+<div class="nav-grid cat-grape">
+
+<VPCard title="WeLearn 随行课堂" desc="外语自主学习平台" link="https://welearn.sflep.com/" logo="https://welearn.sflep.com/favicon.ico" />
+<VPCard title="全国大学生英语竞赛" desc="NECCS 官网" link="http://www.chinaneccs.cn/" logo="http://www.chinaneccs.cn/favicon.ico" />
+<VPCard title="批改网" desc="英语作文智能批改" link="http://www.pigai.org/" logo="http://www.pigai.org/favicon.ico" />
+<VPCard title="CET 报名网" desc="四六级考试报名" link="https://cet-bm.neea.edu.cn/" logo="https://cet-bm.neea.edu.cn/favicon.ico" />
+<VPCard title="NEEA 账号中心" desc="教育部考试院统一账号" link="https://passport.neea.edu.cn/" logo="https://passport.neea.edu.cn/favicon.ico" />
+<VPCard title="CET 成绩查询" desc="四六级成绩查询入口" link="https://cet.neea.edu.cn/" logo="https://cet.neea.edu.cn/favicon.ico" />
+<VPCard title="FiF 高校教学平台" desc="外语互动教学平台" link="https://www.fifedu.com/" logo="https://www.fifedu.com/favicon.ico" />
+
+</div>
+
+## 💪 编程练习
+
+<div class="nav-grid cat-lime">
+
+<VPCard title="PTA 拼题A" desc="程序设计类实验辅助教学平台" link="https://pintia.cn/" logo="https://pintia.cn/favicon.ico" />
+<VPCard title="DotCpp" desc="C 语言网 / 题库与教程" link="https://www.dotcpp.com/" logo="https://www.dotcpp.com/favicon.ico" />
+<VPCard title="DotCpp 算法课程" desc="算法系统学习教程" link="https://www.dotcpp.com/course/algorithm/" logo="https://www.dotcpp.com/favicon.ico" />
+<VPCard title="蓝桥杯大赛" desc="蓝桥杯官方练习与赛事" link="https://dasai.lanqiao.cn/" logo="https://dasai.lanqiao.cn/favicon.ico" />
+<VPCard title="洛谷" desc="算法竞赛社区" link="https://www.luogu.com.cn/" logo="https://www.luogu.com.cn/favicon.ico" />
+<VPCard title="力扣题库" desc="LeetCode 全部题目" link="https://leetcode.cn/problemset/all/" logo="https://leetcode.cn/favicon.ico" />
+
+</div>
+
 ## 🔧 在线服务
 
 <div class="nav-grid cat-teal">
