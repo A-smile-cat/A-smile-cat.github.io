@@ -2,8 +2,8 @@
 home: true
 layout: BlogHome
 title: A-smile-cat
-heroImage: /logo.svg
-heroImageDark: /logo.svg
+heroImage: /logo.png
+heroImageDark: /logo.png
 heroText: A-smile-cat
 tagline: 一只敲代码时会碎碎念的程序喵
 heroFullScreen: true
