@@ -12,11 +12,16 @@ bgImageDark: /hero-bg.jpg
 bgImageStyle:
   background-attachment: fixed
 actions:
-  - text: 博客
-    link: /blog/
+  - text: 快捷导航
+    link: /navigation/
     type: primary
-  - text: 笔记
+  - text: 资源链接
+    link: /link/
+    type: primary
+  - text: 学习笔记
     link: /notes/
+  - text: 个人博客
+    link: /blog/
 
 features:
   - title: JavaGuide
