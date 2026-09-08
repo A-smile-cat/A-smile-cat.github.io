@@ -1,8 +1,8 @@
 ---
 title: 关于我
-index: false
 dir:
   order: 8
+  link: true
 ---
 
 ## 关于我

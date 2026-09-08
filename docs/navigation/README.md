@@ -2,6 +2,7 @@
 title: 快捷导航
 dir:
   order: 1
+  link: true
 ---
 
 ## 🎓 在线课程
