@@ -79,7 +79,6 @@ dir:
 ## 🌍 英语和翻译
 
 <div class="nav-grid cat-grape">
-
 <VPCard title="WeLearn 随行课堂" desc="外语自主学习平台" link="https://welearn.sflep.com/" logo="https://welearn.sflep.com/favicon.ico" />
 <VPCard title="全国大学生英语竞赛" desc="NECCS 官网" link="http://www.chinaneccs.cn/" logo="http://www.chinaneccs.cn/favicon.ico" />
 <VPCard title="批改网" desc="英语作文智能批改" link="http://www.pigai.org/" logo="http://www.pigai.org/favicon.ico" />
@@ -89,6 +88,8 @@ dir:
 <VPCard title="FiF 高校教学平台" desc="外语互动教学平台" link="https://www.fifedu.com/" logo="https://www.fifedu.com/favicon.ico" />
 <VPCard title="DeepL" desc="高质量机器翻译" link="https://www.deepl.com/" logo="https://www.deepl.com/favicon.ico" />
 <VPCard title="Google Translate" desc="谷歌翻译" link="https://translate.google.com/" logo="https://translate.google.com/favicon.ico" />
+
+<VPCard title="Online Etymology Dictionary" desc="在线词源词典" link="https://www.etymonline.com/" logo="https://www.etymonline.com/favicon.ico" />
 
 </div>
 
