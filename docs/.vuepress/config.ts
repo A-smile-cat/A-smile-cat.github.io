@@ -67,6 +67,10 @@ export default defineUserConfig({
 
     // Markdown 增强
     plugins: {
+      // 注册卡片组件，供导航页使用
+      components: {
+        components: ["Badge", "VPCard"],
+      },
       blog: true,
       mdEnhance: {
         align: true,
