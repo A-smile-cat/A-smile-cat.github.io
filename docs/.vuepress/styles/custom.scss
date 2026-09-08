@@ -272,7 +272,8 @@ $nav-accents: (
   "cat-sky": #38a3e0, // 云服务与 API
   "cat-teal": #14b8a6, // 在线服务
   "cat-lime": #84cc16, // 编程练习
-  "cat-grape": #a855f7, // 英语相关
+  "cat-grape": #a855f7, // 英语和翻译
+  "cat-indigo": #6366f1, // AI 相关
 );
 
 @each $name, $color in $nav-accents {

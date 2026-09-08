@@ -60,7 +60,7 @@ export default defineUserConfig({
     blog: {
       name: "A-smile-cat",
       description: "热爱技术的开发者",
-      intro: "/intro.html",
+      intro: "/about/",
       medias: {
         GitHub: "https://github.com/A-smile-cat",
       },

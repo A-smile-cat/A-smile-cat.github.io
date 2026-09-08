@@ -23,7 +23,7 @@ A-smile-cat.github.io/
 │   │   ├── config.ts              ← 站点 + 主题配置
 │   │   ├── client.ts              ← 自定义客户端脚本（打字机、页脚等）
 │   │   ├── public/                ← 静态资源（图片、图标等）
-│   │   │   ├── logo.svg           ← 网站 Logo / 头像
+│   │   │   ├── logo.png           ← 网站 Logo / 头像
 │   │   │   └── hero-bg.jpg        ← 首页全屏背景图
 │   │   └── styles/
 │   │       └── custom.scss        ← 自定义样式
@@ -39,7 +39,7 @@ A-smile-cat.github.io/
 
 ## 一、更换头像 / Logo
 
-头像文件是 `docs/.vuepress/public/logo.svg`。
+头像文件是 `docs/.vuepress/public/logo.png`。
 
 ### 方法 1：替换文件（推荐）
 
@@ -89,7 +89,7 @@ bgImageDark: /hero-bg-dark.jpg    # 暗色模式背景
 home: true
 layout: BlogHome
 title: A-smile-cat
-heroImage: /logo.svg              # 头像
+heroImage: /logo.png              # 头像
 heroText: A-smile-cat             # 大标题
 tagline: 一只敲代码时会碎碎念的程序喵  # 副标题
 heroFullScreen: true              # 首屏全屏显示

@@ -1,5 +1,7 @@
 ---
 title: 快捷导航
+dir:
+  order: 1
 ---
 
 ## 🎓 在线课程
@@ -15,6 +17,19 @@ title: 快捷导航
 
 </div>
 
+## 💪 编程练习
+
+<div class="nav-grid cat-lime">
+
+<VPCard title="PTA 拼题A" desc="程序设计类实验辅助教学平台" link="https://pintia.cn/" logo="https://pintia.cn/favicon.ico" />
+<VPCard title="DotCpp" desc="C 语言网 / 题库与教程" link="https://www.dotcpp.com/" logo="https://www.dotcpp.com/favicon.ico" />
+<VPCard title="DotCpp 算法课程" desc="算法系统学习教程" link="https://www.dotcpp.com/course/algorithm/" logo="https://www.dotcpp.com/favicon.ico" />
+<VPCard title="蓝桥杯大赛" desc="蓝桥杯官方练习与赛事" link="https://dasai.lanqiao.cn/" logo="https://dasai.lanqiao.cn/favicon.ico" />
+<VPCard title="洛谷" desc="算法竞赛社区" link="https://www.luogu.com.cn/" logo="https://www.luogu.com.cn/favicon.ico" />
+<VPCard title="力扣题库" desc="LeetCode 全部题目" link="https://leetcode.cn/problemset/all/" logo="https://leetcode.cn/favicon.ico" />
+
+</div>
+
 ## 📚 学习教程
 
 <div class="nav-grid cat-green">
@@ -23,6 +38,56 @@ title: 快捷导航
 <VPCard title="廖雪峰官网" desc="Python/Java/Git 教程" link="https://www.liaoxuefeng.com/" logo="https://www.liaoxuefeng.com/favicon.ico" />
 <VPCard title="编程派" desc="编程技术博客" link="https://www.coderbusy.com/" logo="https://www.coderbusy.com/favicon.ico" />
 <VPCard title="LeetCode" desc="算法刷题" link="https://leetcode.cn/" logo="https://leetcode.cn/favicon.ico" />
+
+</div>
+
+## 🛠️ 效率工具
+
+<div class="nav-grid cat-amber">
+
+<VPCard title="Notion" desc="笔记与协作" link="https://www.notion.so/" logo="https://www.notion.so/favicon.ico" />
+<VPCard title="飞书" desc="企业协作平台" link="https://www.feishu.cn/" logo="https://www.feishu.cn/favicon.ico" />
+<VPCard title="腾讯文档" desc="在线协作文档" link="https://docs.qq.com/" logo="https://docs.qq.com/favicon.ico" />
+<VPCard title="ProcessOn" desc="流程图绘制" link="https://www.processon.com/" logo="https://www.processon.com/favicon.ico" />
+<VPCard title="Draw.io" desc="图表绘制" link="https://app.diagrams.net/" logo="https://app.diagrams.net/favicon.ico" />
+<VPCard title="Excalidraw" desc="手绘风格白板" link="https://excalidraw.com/" logo="https://excalidraw.com/favicon.ico" />
+<VPCard title="TinyPNG" desc="图片压缩" link="https://tinypng.com/" logo="https://tinypng.com/favicon.ico" />
+<VPCard title="Remove.bg" desc="图片去背景" link="https://www.remove.bg/" logo="https://www.remove.bg/favicon.ico" />
+<VPCard title="TinyJPG" desc="JPEG 压缩" link="https://tinyjpg.com/" logo="https://tinyjpg.com/favicon.ico" />
+<VPCard title="Squoosh" desc="图片在线压缩" link="https://squoosh.app/" logo="https://squoosh.app/favicon.ico" />
+
+</div>
+
+## 🎨 设计资源
+
+<div class="nav-grid cat-pink">
+
+<VPCard title="Dribbble" desc="设计作品分享" link="https://dribbble.com/" logo="https://dribbble.com/favicon.ico" />
+<VPCard title="Behance" desc="创意作品集" link="https://www.behance.net/" logo="https://www.behance.net/favicon.ico" />
+<VPCard title="Unsplash" desc="免费高清图片" link="https://unsplash.com/" logo="https://unsplash.com/favicon.ico" />
+<VPCard title="Pexels" desc="免费素材库" link="https://www.pexels.com/" logo="https://www.pexels.com/favicon.ico" />
+<VPCard title="Iconfont" desc="阿里巴巴矢量图标库" link="https://www.iconfont.cn/" logo="https://www.iconfont.cn/favicon.ico" />
+<VPCard title="Flaticon" desc="免费图标下载" link="https://www.flaticon.com/" logo="https://www.flaticon.com/favicon.ico" />
+<VPCard title="Coolors" desc="配色方案生成器" link="https://coolors.co/" logo="https://coolors.co/favicon.ico" />
+<VPCard title="Google Fonts" desc="免费字体库" link="https://fonts.google.com/" logo="https://fonts.google.com/favicon.ico" />
+<VPCard title="LottieFiles" desc="动画资源" link="https://lottiefiles.com/" logo="https://lottiefiles.com/favicon.ico" />
+<VPCard title="undraw" desc="插画素材" link="https://undraw.co/" logo="https://undraw.co/favicon.ico" />
+
+</div>
+
+## 🌍 英语和翻译
+
+<div class="nav-grid cat-grape">
+
+<VPCard title="WeLearn 随行课堂" desc="外语自主学习平台" link="https://welearn.sflep.com/" logo="https://welearn.sflep.com/favicon.ico" />
+<VPCard title="全国大学生英语竞赛" desc="NECCS 官网" link="http://www.chinaneccs.cn/" logo="http://www.chinaneccs.cn/favicon.ico" />
+<VPCard title="批改网" desc="英语作文智能批改" link="http://www.pigai.org/" logo="http://www.pigai.org/favicon.ico" />
+<VPCard title="CET 报名网" desc="四六级考试报名" link="https://cet-bm.neea.edu.cn/" logo="https://cet-bm.neea.edu.cn/favicon.ico" />
+<VPCard title="NEEA 账号中心" desc="教育部考试院统一账号" link="https://passport.neea.edu.cn/" logo="https://passport.neea.edu.cn/favicon.ico" />
+<VPCard title="CET 成绩查询" desc="四六级成绩查询入口" link="https://cet.neea.edu.cn/" logo="https://cet.neea.edu.cn/favicon.ico" />
+<VPCard title="FiF 高校教学平台" desc="外语互动教学平台" link="https://www.fifedu.com/" logo="https://www.fifedu.com/favicon.ico" />
+<VPCard title="DeepL" desc="高质量机器翻译" link="https://www.deepl.com/" logo="https://www.deepl.com/favicon.ico" />
+<VPCard title="Google Translate" desc="谷歌翻译" link="https://translate.google.com/" logo="https://translate.google.com/favicon.ico" />
 
 </div>
 
@@ -54,23 +119,6 @@ title: 快捷导航
 
 </div>
 
-## 🎨 设计资源
-
-<div class="nav-grid cat-pink">
-
-<VPCard title="Dribbble" desc="设计作品分享" link="https://dribbble.com/" logo="https://dribbble.com/favicon.ico" />
-<VPCard title="Behance" desc="创意作品集" link="https://www.behance.net/" logo="https://www.behance.net/favicon.ico" />
-<VPCard title="Unsplash" desc="免费高清图片" link="https://unsplash.com/" logo="https://unsplash.com/favicon.ico" />
-<VPCard title="Pexels" desc="免费素材库" link="https://www.pexels.com/" logo="https://www.pexels.com/favicon.ico" />
-<VPCard title="Iconfont" desc="阿里巴巴矢量图标库" link="https://www.iconfont.cn/" logo="https://www.iconfont.cn/favicon.ico" />
-<VPCard title="Flaticon" desc="免费图标下载" link="https://www.flaticon.com/" logo="https://www.flaticon.com/favicon.ico" />
-<VPCard title="Coolors" desc="配色方案生成器" link="https://coolors.co/" logo="https://coolors.co/favicon.ico" />
-<VPCard title="Google Fonts" desc="免费字体库" link="https://fonts.google.com/" logo="https://fonts.google.com/favicon.ico" />
-<VPCard title="LottieFiles" desc="动画资源" link="https://lottiefiles.com/" logo="https://lottiefiles.com/favicon.ico" />
-<VPCard title="undraw" desc="插画素材" link="https://undraw.co/" logo="https://undraw.co/favicon.ico" />
-
-</div>
-
 ## 📰 技术资讯
 
 <div class="nav-grid cat-red">
@@ -84,23 +132,6 @@ title: 快捷导航
 <VPCard title="Dev.to" desc="开发者社区" link="https://dev.to/" logo="https://dev.to/favicon.ico" />
 <VPCard title="OSS Insight" desc="开源项目分析" link="https://ossinsight.io/" logo="https://ossinsight.io/favicon.ico" />
 <VPCard title="GitHub Trending" desc="热门项目排行" link="https://github.com/trending" logo="https://github.com/favicon.ico" />
-
-</div>
-
-## 🛠️ 效率工具
-
-<div class="nav-grid cat-amber">
-
-<VPCard title="Notion" desc="笔记与协作" link="https://www.notion.so/" logo="https://www.notion.so/favicon.ico" />
-<VPCard title="飞书" desc="企业协作平台" link="https://www.feishu.cn/" logo="https://www.feishu.cn/favicon.ico" />
-<VPCard title="腾讯文档" desc="在线协作文档" link="https://docs.qq.com/" logo="https://docs.qq.com/favicon.ico" />
-<VPCard title="ProcessOn" desc="流程图绘制" link="https://www.processon.com/" logo="https://www.processon.com/favicon.ico" />
-<VPCard title="Draw.io" desc="图表绘制" link="https://app.diagrams.net/" logo="https://app.diagrams.net/favicon.ico" />
-<VPCard title="Excalidraw" desc="手绘风格白板" link="https://excalidraw.com/" logo="https://excalidraw.com/favicon.ico" />
-<VPCard title="TinyPNG" desc="图片压缩" link="https://tinypng.com/" logo="https://tinypng.com/favicon.ico" />
-<VPCard title="Remove.bg" desc="图片去背景" link="https://www.remove.bg/" logo="https://www.remove.bg/favicon.ico" />
-<VPCard title="TinyJPG" desc="JPEG 压缩" link="https://tinyjpg.com/" logo="https://tinyjpg.com/favicon.ico" />
-<VPCard title="Squoosh" desc="图片在线压缩" link="https://squoosh.app/" logo="https://squoosh.app/favicon.ico" />
 
 </div>
 
@@ -136,30 +167,14 @@ title: 快捷导航
 
 </div>
 
-## 🌍 英语相关
+## 🤖 AI 相关
 
-<div class="nav-grid cat-grape">
+<div class="nav-grid cat-indigo">
 
-<VPCard title="WeLearn 随行课堂" desc="外语自主学习平台" link="https://welearn.sflep.com/" logo="https://welearn.sflep.com/favicon.ico" />
-<VPCard title="全国大学生英语竞赛" desc="NECCS 官网" link="http://www.chinaneccs.cn/" logo="http://www.chinaneccs.cn/favicon.ico" />
-<VPCard title="批改网" desc="英语作文智能批改" link="http://www.pigai.org/" logo="http://www.pigai.org/favicon.ico" />
-<VPCard title="CET 报名网" desc="四六级考试报名" link="https://cet-bm.neea.edu.cn/" logo="https://cet-bm.neea.edu.cn/favicon.ico" />
-<VPCard title="NEEA 账号中心" desc="教育部考试院统一账号" link="https://passport.neea.edu.cn/" logo="https://passport.neea.edu.cn/favicon.ico" />
-<VPCard title="CET 成绩查询" desc="四六级成绩查询入口" link="https://cet.neea.edu.cn/" logo="https://cet.neea.edu.cn/favicon.ico" />
-<VPCard title="FiF 高校教学平台" desc="外语互动教学平台" link="https://www.fifedu.com/" logo="https://www.fifedu.com/favicon.ico" />
-
-</div>
-
-## 💪 编程练习
-
-<div class="nav-grid cat-lime">
-
-<VPCard title="PTA 拼题A" desc="程序设计类实验辅助教学平台" link="https://pintia.cn/" logo="https://pintia.cn/favicon.ico" />
-<VPCard title="DotCpp" desc="C 语言网 / 题库与教程" link="https://www.dotcpp.com/" logo="https://www.dotcpp.com/favicon.ico" />
-<VPCard title="DotCpp 算法课程" desc="算法系统学习教程" link="https://www.dotcpp.com/course/algorithm/" logo="https://www.dotcpp.com/favicon.ico" />
-<VPCard title="蓝桥杯大赛" desc="蓝桥杯官方练习与赛事" link="https://dasai.lanqiao.cn/" logo="https://dasai.lanqiao.cn/favicon.ico" />
-<VPCard title="洛谷" desc="算法竞赛社区" link="https://www.luogu.com.cn/" logo="https://www.luogu.com.cn/favicon.ico" />
-<VPCard title="力扣题库" desc="LeetCode 全部题目" link="https://leetcode.cn/problemset/all/" logo="https://leetcode.cn/favicon.ico" />
+<VPCard title="ChatGPT" desc="AI 对话助手" link="https://chat.openai.com/" logo="https://chat.openai.com/favicon.ico" />
+<VPCard title="Claude" desc="Anthropic AI" link="https://claude.ai/" logo="https://claude.ai/favicon.ico" />
+<VPCard title="Perplexity" desc="AI 搜索引擎" link="https://www.perplexity.ai/" logo="https://www.perplexity.ai/favicon.ico" />
+<VPCard title="Otter.ai" desc="AI 语音转文字" link="https://otter.ai/" logo="https://otter.ai/favicon.ico" />
 
 </div>
 
@@ -167,12 +182,6 @@ title: 快捷导航
 
 <div class="nav-grid cat-teal">
 
-<VPCard title="ChatGPT" desc="AI 对话助手" link="https://chat.openai.com/" logo="https://chat.openai.com/favicon.ico" />
-<VPCard title="Claude" desc="Anthropic AI" link="https://claude.ai/" logo="https://claude.ai/favicon.ico" />
-<VPCard title="Perplexity" desc="AI 搜索引擎" link="https://www.perplexity.ai/" logo="https://www.perplexity.ai/favicon.ico" />
-<VPCard title="DeepL" desc="机器翻译" link="https://www.deepl.com/" logo="https://www.deepl.com/favicon.ico" />
-<VPCard title="Google Translate" desc="谷歌翻译" link="https://translate.google.com/" logo="https://translate.google.com/favicon.ico" />
-<VPCard title="Otter.ai" desc="语音转文字" link="https://otter.ai/" logo="https://otter.ai/favicon.ico" />
 <VPCard title="10015.io" desc="在线终端" link="https://10015.io/" logo="https://10015.io/favicon.ico" />
 <VPCard title="HTTPie" desc="HTTP 客户端" link="https://httpie.io/" logo="https://httpie.io/favicon.ico" />
 
