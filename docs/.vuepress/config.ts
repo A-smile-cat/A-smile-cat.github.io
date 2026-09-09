@@ -40,20 +40,111 @@ export default defineUserConfig({
       { text: "关于我", link: "/about/", icon: "mdi:account-outline" },
     ],
 
-    // 侧边栏（显式配置，支持多级分组）
+    // 侧边栏（显式配置）
+    // - 一级分组顺序与 navbar 保持一致
+    // - 所有可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
+    // - 分组不配 expanded，默认收起，只显示顶层；点击标题或访问对应页面时自动展开
     sidebar: {
+      "/navigation/": [
+        {
+          text: "快捷导航",
+          link: "/navigation/",
+          collapsible: true,
+          children: [
+            {
+              text: "导航页面",
+              link: "/navigation/",
+              collapsible: true,
+              children: [
+                { text: "快捷导航", link: "/navigation/" },
+              ],
+            },
+          ],
+        },
+      ],
+      "/notes/": [
+        {
+          text: "学习笔记",
+          link: "/notes/",
+          collapsible: true,
+          children: [
+            {
+              text: "笔记页面",
+              link: "/notes/",
+              collapsible: true,
+              children: [
+                { text: "学习笔记", link: "/notes/" },
+              ],
+            },
+          ],
+        },
+      ],
+      "/blog/": [
+        {
+          text: "计算机知识库",
+          link: "/blog/",
+          collapsible: true,
+          children: [
+            {
+              text: "知识库页面",
+              link: "/blog/",
+              collapsible: true,
+              children: [
+                { text: "计算机知识库", link: "/blog/" },
+              ],
+            },
+          ],
+        },
+      ],
+      "/ai-tech/": [
+        {
+          text: "AI 技术专栏",
+          link: "/ai-tech/",
+          collapsible: true,
+          children: [
+            {
+              text: "专栏页面",
+              link: "/ai-tech/",
+              collapsible: true,
+              children: [
+                { text: "AI 技术专栏", link: "/ai-tech/" },
+              ],
+            },
+          ],
+        },
+      ],
+      "/ai-app/": [
+        {
+          text: "AI 应用技术专栏",
+          link: "/ai-app/",
+          collapsible: true,
+          children: [
+            {
+              text: "专栏页面",
+              link: "/ai-app/",
+              collapsible: true,
+              children: [
+                { text: "AI 应用技术专栏", link: "/ai-app/" },
+              ],
+            },
+          ],
+        },
+      ],
       "/research/": [
         {
           text: "研究中心",
           link: "/research/",
+          collapsible: true,
           children: [
             {
               text: "科研相关",
               link: "/research/ky-keyan/",
+              collapsible: true,
               children: [
                 {
                   text: "具身智能与 VLA",
                   link: "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/",
+                  collapsible: true,
                   children: [
                     "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
                     "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/vlash-explained.md",
@@ -62,10 +153,63 @@ export default defineUserConfig({
                 {
                   text: "数据提取",
                   link: "/research/ky-keyan/shu-ju-ti-qu/",
+                  collapsible: true,
                   children: [
                     "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
                   ],
                 },
+              ],
+            },
+          ],
+        },
+      ],
+      "/guide/": [
+        {
+          text: "使用指南",
+          link: "/guide/",
+          collapsible: true,
+          children: [
+            {
+              text: "指南文章",
+              link: "/guide/",
+              collapsible: true,
+              children: [
+                "/guide/github-pages-deploy.md",
+                "/guide/template-guide.md",
+              ],
+            },
+          ],
+        },
+      ],
+      "/entertainment/": [
+        {
+          text: "娱乐场",
+          link: "/entertainment/",
+          collapsible: true,
+          children: [
+            {
+              text: "娱乐内容",
+              link: "/entertainment/",
+              collapsible: true,
+              children: [
+                "/entertainment/enter1.md",
+              ],
+            },
+          ],
+        },
+      ],
+      "/about/": [
+        {
+          text: "关于我",
+          link: "/about/",
+          collapsible: true,
+          children: [
+            {
+              text: "关于页面",
+              link: "/about/",
+              collapsible: true,
+              children: [
+                { text: "关于我", link: "/about/" },
               ],
             },
           ],
