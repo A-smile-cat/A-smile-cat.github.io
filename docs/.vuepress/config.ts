@@ -71,9 +71,11 @@ export default defineUserConfig({
     },
 
     // 加密（可选）
+    // 注意：这里填写的是密码的 bcrypt 哈希（不是明文密码）
     encrypt: {
-      // 默认密码（所有受保护页面通用）
-      passwords: ["ProgramCat060"],
+      config: {
+        "/entertainment/": ["$2a$10$pKE76iVUdm4/JrPyjJGCMOTerthJCUBSxMEgdMYS0F3oyPX6BlNC6"],
+      },
     },
 
     // Markdown 增强
