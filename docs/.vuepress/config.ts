@@ -74,7 +74,7 @@ export default defineUserConfig({
     // 注意：这里填写的是密码的 bcrypt 哈希（不是明文密码）
     encrypt: {
       config: {
-        "/entertainment/": ["$2a$10$pKE76iVUdm4/JrPyjJGCMOTerthJCUBSxMEgdMYS0F3oyPX6BlNC6"],
+        "/entertainment/": ["$2a$10$hIizGwoPPcNlD6wtqB2rDuOPCMJatEKAref3.dz2YPKyLBSC34Zuy"],
       },
     },
 
