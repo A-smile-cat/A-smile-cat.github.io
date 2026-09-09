@@ -71,7 +71,10 @@ export default defineUserConfig({
     },
 
     // 加密（可选）
-    encrypt: {},
+    encrypt: {
+      // 默认密码（所有受保护页面通用）
+      passwords: ["ProgramCat060"],
+    },
 
     // Markdown 增强
     plugins: {
