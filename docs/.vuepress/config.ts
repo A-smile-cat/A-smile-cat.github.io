@@ -35,6 +35,7 @@ export default defineUserConfig({
       { text: "AI 技术专栏", link: "/ai-tech/", icon: "mdi:robot-outline" },
       { text: "AI 应用技术专栏", link: "/ai-app/", icon: "mdi:application-brackets-outline" },
       { text: "研究中心", link: "/research/", icon: "mdi:flask-outline" },
+      { text: "使用指南", link: "/guide/", icon: "mdi:map-marker-radius-outline" },
       { text: "娱乐场", link: "/entertainment/", icon: "mdi:gamepad-variant-outline" },
       { text: "关于我", link: "/about/", icon: "mdi:account-outline" },
     ],

@@ -1,7 +1,7 @@
 ---
 title: 关于我
 dir:
-  order: 8
+  order: 9
   link: true
 ---
 
