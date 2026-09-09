@@ -257,6 +257,20 @@ html.dark {
   }
 }
 
+/* ===== 导航栏图标微调 ===== */
+.vp-navbar {
+  // 图标与文字间距、垂直对齐
+  .vp-navbar-item,
+  .navbar-dropdown-item {
+    hope-icon,
+    iconify-icon {
+      margin-inline-end: 0.35em;
+      font-size: 1.1em;
+      vertical-align: -0.18em;
+    }
+  }
+}
+
 /* ===== 导航页卡片网格：分类配色 ===== */
 
 // 每个分类的主题色（想改颜色就改这里的色值）

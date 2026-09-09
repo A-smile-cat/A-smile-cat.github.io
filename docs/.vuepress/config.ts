@@ -29,18 +29,21 @@ export default defineUserConfig({
   theme: hopeTheme({
     // 导航栏
     navbar: [
-      { text: "快捷导航", link: "/navigation/" },
-      { text: "学习笔记", link: "/notes/" },
-      { text: "计算机知识库", link: "/blog/" },
-      { text: "AI 技术专栏", link: "/ai-tech/" },
-      { text: "AI 应用技术专栏", link: "/ai-app/" },
-      { text: "研究中心", link: "/research/" },
-      { text: "娱乐场", link: "/entertainment/" },
-      { text: "关于我", link: "/about/" },
+      { text: "快捷导航", link: "/navigation/", icon: "mdi:compass" },
+      { text: "学习笔记", link: "/notes/", icon: "mdi:notebook-outline" },
+      { text: "计算机知识库", link: "/blog/", icon: "mdi:book-open-variant" },
+      { text: "AI 技术专栏", link: "/ai-tech/", icon: "mdi:robot-outline" },
+      { text: "AI 应用技术专栏", link: "/ai-app/", icon: "mdi:application-brackets-outline" },
+      { text: "研究中心", link: "/research/", icon: "mdi:flask-outline" },
+      { text: "娱乐场", link: "/entertainment/", icon: "mdi:gamepad-variant-outline" },
+      { text: "关于我", link: "/about/", icon: "mdi:account-outline" },
     ],
 
     // 侧边栏
     sidebar: "structure",
+
+    // 图标资源（Iconify，供 navbar 图标与 FontIcon 使用）
+    iconAssets: "iconify",
 
     // 社交链接
     social: [
