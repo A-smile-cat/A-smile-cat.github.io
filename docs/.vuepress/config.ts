@@ -40,8 +40,38 @@ export default defineUserConfig({
       { text: "关于我", link: "/about/", icon: "mdi:account-outline" },
     ],
 
-    // 侧边栏
-    sidebar: "structure",
+    // 侧边栏（显式配置，支持多级分组）
+    sidebar: {
+      "/research/": [
+        {
+          text: "研究中心",
+          link: "/research/",
+          children: [
+            {
+              text: "科研相关",
+              link: "/research/ky-keyan/",
+              children: [
+                {
+                  text: "具身智能与 VLA",
+                  link: "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/",
+                  children: [
+                    "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
+                    "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/vlash-explained.md",
+                  ],
+                },
+                {
+                  text: "数据提取",
+                  link: "/research/ky-keyan/shu-ju-ti-qu/",
+                  children: [
+                    "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     // 图标资源（Iconify，供 navbar 图标与 FontIcon 使用）
     iconAssets: "iconify",
