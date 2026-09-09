@@ -41,11 +41,11 @@ export default defineUserConfig({
     ],
 
     // 侧边栏（显式配置）
+    // - 用数组形式 = 全站统一侧边栏，每个页面都显示同一套目录（对象形式则是按路径分块，访问哪显示哪）
     // - 一级分组顺序与 navbar 保持一致
     // - 所有可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
-    // - 分组不配 expanded，默认收起，只显示顶层；点击标题或访问对应页面时自动展开
-    sidebar: {
-      "/navigation/": [
+    // - 分组不配 expanded，默认收起，只显示顶层；点击标题展开/收起，进入某栏目时该分组自动展开
+    sidebar: [
         {
           text: "快捷导航",
           link: "/navigation/",
@@ -61,8 +61,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/notes/": [
         {
           text: "学习笔记",
           link: "/notes/",
@@ -78,8 +76,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/blog/": [
         {
           text: "计算机知识库",
           link: "/blog/",
@@ -95,8 +91,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/ai-tech/": [
         {
           text: "AI 技术专栏",
           link: "/ai-tech/",
@@ -112,8 +106,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/ai-app/": [
         {
           text: "AI 应用技术专栏",
           link: "/ai-app/",
@@ -129,8 +121,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/research/": [
         {
           text: "研究中心",
           link: "/research/",
@@ -162,8 +152,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/guide/": [
         {
           text: "使用指南",
           link: "/guide/",
@@ -180,8 +168,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/entertainment/": [
         {
           text: "娱乐场",
           link: "/entertainment/",
@@ -197,8 +183,6 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-      "/about/": [
         {
           text: "关于我",
           link: "/about/",
@@ -214,8 +198,7 @@ export default defineUserConfig({
             },
           ],
         },
-      ],
-    },
+    ],
 
     // 图标资源（Iconify，供 navbar 图标与 FontIcon 使用）
     iconAssets: "iconify",
