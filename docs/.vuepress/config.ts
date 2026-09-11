@@ -97,15 +97,15 @@ export default defineUserConfig({
               text: "具身智能与 VLA",
               collapsible: true,
               children: [
-                "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
-                "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/vlash-explained.md",
+                "/research/vla/asyncvla-explained.md",
+                "/research/vla/vlash-explained.md",
               ],
             },
             {
               text: "数据提取",
               collapsible: true,
               children: [
-                "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
+                "/research/data-extract/X平台科技新闻自动检索方案调研.md",
               ],
             },
           ],
@@ -169,11 +169,10 @@ export default defineUserConfig({
         components: ["Badge", "VPCard"],
       },
       blog: true,
-      // 目录插件：默认会为「没有 README 的目录」自动生成一个目录页（标题取自文件夹名，
-      // 中文目录会变成拼音，很丑）。侧边栏的二级分组只做展开/折叠、不跳转，
-      // 因此这里排除研究中心的子目录，不生成这类落地页。
+      // 目录插件：默认会为「没有 README 的目录」自动生成一个目录页（标题取自文件夹名）。
+      // 侧边栏的分组只做展开/折叠、不跳转，不需要这类落地页，因此排除这几处子目录。
       catalog: {
-        exclude: [/^\/research\/ky-keyan\//],
+        exclude: [/^\/research\/(vla|data-extract)\//],
       },
       mdEnhance: {
         align: true,
