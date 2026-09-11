@@ -4,3 +4,11 @@ docs/.vuepress/.temp/
 docs/.vuepress/dist/
 .DS_Store
 *.log
+
+# 本地环境变量（存放娱乐场访问密码等敏感信息，切勿提交）
+.env
+.env.local
+.env.*.local
+
+# 协作工具本地数据（工作记录等）
+.workbuddy/

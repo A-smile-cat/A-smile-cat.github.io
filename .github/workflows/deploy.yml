@@ -33,6 +33,9 @@ jobs:
         run: npm ci
 
       - name: Build VuePress site
+        env:
+          # 娱乐场访问密码的明文只在此处注入，构建时被 bcrypt 哈希后写入产物
+          ENTERTAINMENT_PASSWORD: ${{ secrets.ENTERTAINMENT_PASSWORD }}
         run: npm run docs:build
 
       - name: Upload artifact
