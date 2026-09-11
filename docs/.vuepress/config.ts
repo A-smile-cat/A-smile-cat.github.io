@@ -3,12 +3,14 @@ import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 import "dotenv/config";
 
+import { encryptedPagesPlugin } from "./plugins/encrypted-pages";
+
 // ---------------------------------------------------------------------------
-// 娱乐场（/entertainment/）访问密码
+// 娱乐场（/entertainment/）访问口令
 // ---------------------------------------------------------------------------
-// theme-hope 的 encrypt 机制是「构建时哈希」：构建阶段对配置里提供的密码做 bcrypt
-// 哈希，只把哈希写进站点产物，浏览器端再用 compareSync(用户输入, 哈希) 校验。
-// 因此这里必须提供「明文密码」，加密动作由主题在构建时完成。
+// 该口令在构建期用于加密受保护页面的正文（AES-256-GCM，密钥由口令经
+// PBKDF2-SHA256 派生），产物里只留密文与 KDF 参数；浏览器端用访问者输入的口令
+// 派生出同一把密钥解密。实现见 plugins/encrypted-pages.ts 与 client.ts。
 //
 // 明文不进入仓库：本地构建由项目根目录的 .env 提供（.env 已写入 .gitignore），
 // CI 构建由 GitHub Actions Secret 注入，二者都只存在于构建环境。
@@ -17,10 +19,10 @@ const ENTERTAINMENT_PASSWORD = process.env.ENTERTAINMENT_PASSWORD;
 if (!ENTERTAINMENT_PASSWORD) {
   throw new Error(
     [
-      "缺少环境变量 ENTERTAINMENT_PASSWORD（娱乐场访问密码），已终止构建。",
-      "  本地构建：在项目根目录创建 .env，写入一行 ENTERTAINMENT_PASSWORD=你的密码",
+      "缺少环境变量 ENTERTAINMENT_PASSWORD（娱乐场访问口令），已终止构建。",
+      "  本地构建：在项目根目录创建 .env，写入一行 ENTERTAINMENT_PASSWORD=你的口令",
       "  CI 构建：仓库 Settings → Secrets and variables → Actions → 新建 Secret，名称同上",
-      "此处不放行是为了避免漏配时把娱乐场页面以「无保护」状态发布出去。",
+      "此处不放行是为了避免漏配时无法加密正文，从而把娱乐场内容以明文发布出去。",
     ].join("\n"),
   );
 }
@@ -29,6 +31,14 @@ export default defineUserConfig({
   base: "/",
 
   bundler: viteBundler(),
+
+  plugins: [
+    // 构建期加密娱乐场正文，产物中只保留密文
+    encryptedPagesPlugin({
+      password: ENTERTAINMENT_PASSWORD,
+      dir: "entertainment",
+    }),
+  ],
 
   lang: "zh-CN",
   title: "A-smile-cat",
@@ -251,14 +261,9 @@ export default defineUserConfig({
     },
 
     // 加密（可选）
-    // 值的语义是「明文密码」：构建时由 theme-hope 做 bcrypt 哈希后写入产物，
-    // 浏览器端 compareSync(输入密码, 哈希)。明文取自环境变量，
-    // 仓库与站点产物中都不会出现明文。
-    encrypt: {
-      config: {
-        "/entertainment/": [ENTERTAINMENT_PASSWORD],
-      },
-    },
+    // 已改用 plugins/encrypted-pages.ts：构建期加密正文、产物只留密文，
+    // 比主题自带的 encrypt 门禁更彻底（门禁只是不显示，正文仍在源码里）。
+    // 因此这里不再配置 theme.encrypt。
 
     // Markdown 增强
     plugins: {

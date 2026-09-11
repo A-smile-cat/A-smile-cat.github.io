@@ -1,5 +1,5 @@
 import { defineClientConfig } from "vuepress/client";
-import { onMounted, onUnmounted, watch } from "vue";
+import { computed, defineComponent, h, onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vuepress/client";
 
 import "./styles/custom.scss";
@@ -131,7 +131,202 @@ const injectFooter = () => {
   document.head.appendChild(script);
 };
 
+/* --------------------------------------------------------------------------
+ * 受保护页面的前端解密
+ * --------------------------------------------------------------------------
+ * docs/.vuepress/plugins/encrypted-pages.ts 会在构建期把受保护目录下的正文
+ * 渲染成 HTML 后用 AES-256-GCM 加密，页面上只留下密文。这里用访问者输入的口令
+ * 通过 PBKDF2-SHA256 派生同一把密钥解密，再渲染得到的 HTML。
+ * 全程使用浏览器原生 WebCrypto：不依赖后端，也不发起任何请求。
+ *
+ * 注意：迭代次数必须与 plugins/encrypted-pages.ts 中的 ITERATIONS 保持一致。
+ */
+
+interface EncryptedPayload {
+  /** PBKDF2 迭代次数 */
+  i: number;
+  /** base64 盐值 */
+  s: string;
+  /** base64 初始向量 */
+  v: string;
+  /** base64 密文（末尾含 GCM 认证标签） */
+  c: string;
+}
+
+const SESSION_KEY = "smilecat-encrypted-content";
+const LOCAL_KEY = "smilecat-encrypted-content-remember";
+
+/** 同一会话内跨页面复用口令，避免在受保护页面之间跳转时反复输入 */
+let cachedPassword = "";
+
+const decodeBase64 = (value: string): Uint8Array =>
+  Uint8Array.from(atob(value), (char) => char.charCodeAt(0));
+
+const decryptPayload = async (
+  password: string,
+  payload: EncryptedPayload
+): Promise<string> => {
+  const baseKey = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt: decodeBase64(payload.s),
+      iterations: payload.i,
+      hash: "SHA-256",
+    },
+    baseKey,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"]
+  );
+  // 口令不对时 GCM 的认证校验会失败并抛出，拿不到任何明文
+  const plain = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: decodeBase64(payload.v) },
+    key,
+    decodeBase64(payload.c)
+  );
+  return new TextDecoder().decode(plain);
+};
+
+const INPUT_BORDER = "1px solid rgba(128, 128, 128, 0.35)";
+
+const EncryptedContent = defineComponent({
+  name: "EncryptedContent",
+
+  props: {
+    payload: { type: String, required: true },
+  },
+
+  setup(props) {
+    const html = ref("");
+    const input = ref("");
+    const failed = ref(false);
+    const busy = ref(false);
+    const remember = ref(false);
+
+    const payload = computed<EncryptedPayload>(() => JSON.parse(atob(props.payload)));
+
+    const unlock = async (password: string, persist: boolean) => {
+      if (!password || busy.value) return;
+      busy.value = true;
+      failed.value = false;
+      try {
+        html.value = await decryptPayload(password, payload.value);
+        cachedPassword = password;
+        if (persist) localStorage.setItem(LOCAL_KEY, password);
+        else sessionStorage.setItem(SESSION_KEY, password);
+      } catch {
+        failed.value = true;
+      } finally {
+        busy.value = false;
+      }
+    };
+
+    onMounted(() => {
+      const stored =
+        sessionStorage.getItem(SESSION_KEY) ??
+        localStorage.getItem(LOCAL_KEY) ??
+        cachedPassword;
+      if (stored) void unlock(stored, false);
+    });
+
+    const submit = () => void unlock(input.value, remember.value);
+
+    const renderForm = () =>
+      h(
+        "div",
+        { style: "display:flex;justify-content:center;padding:32px 0;" },
+        [
+          h(
+            "div",
+            {
+              style: `width:100%;max-width:360px;border:${INPUT_BORDER};border-radius:12px;padding:24px;text-align:center;box-sizing:border-box;`,
+            },
+            [
+              h(
+                "div",
+                { style: "font-size:14px;font-weight:500;margin-bottom:6px;" },
+                "该页面内容已加密"
+              ),
+              h(
+                "div",
+                { style: "font-size:12px;opacity:0.7;margin-bottom:16px;" },
+                "请输入访问口令以查看正文"
+              ),
+              h("input", {
+                type: "password",
+                value: input.value,
+                placeholder: "访问口令",
+                autocomplete: "off",
+                style: `width:100%;padding:10px 12px;border:${INPUT_BORDER};border-radius:8px;font-size:14px;box-sizing:border-box;background:transparent;color:inherit;outline:none;`,
+                onInput: (event: Event) => {
+                  input.value = (event.target as HTMLInputElement).value;
+                  failed.value = false;
+                },
+                onKeydown: (event: KeyboardEvent) => {
+                  if (event.key === "Enter") submit();
+                },
+              }),
+              h(
+                "label",
+                {
+                  style:
+                    "display:flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;opacity:0.8;cursor:pointer;",
+                },
+                [
+                  h("input", {
+                    type: "checkbox",
+                    checked: remember.value,
+                    onChange: (event: Event) => {
+                      remember.value = (event.target as HTMLInputElement).checked;
+                    },
+                  }),
+                  "记住密码",
+                ]
+              ),
+              h(
+                "button",
+                {
+                  type: "button",
+                  disabled: busy.value,
+                  style:
+                    "width:100%;margin-top:16px;padding:10px;border:none;border-radius:8px;background:#3eaf7c;color:#fff;font-size:14px;cursor:pointer;",
+                  onClick: submit,
+                },
+                busy.value ? "解密中…" : "解锁"
+              ),
+              h(
+                "div",
+                {
+                  style:
+                    "min-height:18px;margin-top:10px;font-size:12px;color:#e5484d;",
+                },
+                failed.value ? "口令不正确" : ""
+              ),
+            ]
+          ),
+        ]
+      );
+
+    return () => {
+      if (html.value) {
+        return h("div", { class: "encrypted-content", innerHTML: html.value });
+      }
+      return renderForm();
+    };
+  },
+});
+
 export default defineClientConfig({
+  enhance({ app }) {
+    app.component("EncryptedContent", EncryptedContent);
+  },
   setup() {
     const route = useRoute();
 
