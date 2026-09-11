@@ -5,6 +5,10 @@ docs/.vuepress/dist/
 .DS_Store
 *.log
 
+# VuePress 加载配置时生成的临时 bundle（正常构建结束时自动删除，
+# 构建被中断时会残留）
+docs/.vuepress/config.ts.*.mjs
+
 # 本地环境变量（存放娱乐场访问密码等敏感信息，切勿提交）
 .env
 .env.local

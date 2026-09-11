@@ -174,6 +174,19 @@ export default defineUserConfig({
       catalog: {
         exclude: [/^\/research\/(vla|data-extract)\//],
       },
+      // 贡献者列表来自 git 提交记录，而提交里带有 AI 协作署名
+      // （Co-Authored-By: Claude Opus 5 (1M context) / AtomCode …），插件会把它们
+      // 一并算作贡献者。这里按名字与邮箱把这类署名过滤掉，只保留真实贡献者。
+      git: {
+        contributors: {
+          transform: (contributors) =>
+            contributors.filter(
+              (contributor) =>
+                !/^(Claude|AtomCode)\b/i.test(contributor.name) &&
+                !/noreply@(anthropic|atomgit)\.com$/i.test(contributor.email),
+            ),
+        },
+      },
       mdEnhance: {
         align: true,
         attrs: true,
