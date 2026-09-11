@@ -76,111 +76,36 @@ export default defineUserConfig({
     // 侧边栏（显式配置）
     // - 用数组形式 = 全站统一侧边栏，每个页面都显示同一套目录（对象形式则是按路径分块，访问哪显示哪）
     // - 一级分组顺序与 navbar 保持一致
-    // - 所有可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
+    // - 只保留「一级分组 + 其下的实际页面/子分组」两层，不再有中间的包装分组；
+    //   一级分组下只有一个同名同链接页面时，直接退化为普通链接（不再可展开）
+    // - 可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
     // - 分组不配 expanded，默认收起，只显示顶层；点击标题展开/收起，进入某栏目时该分组自动展开
     sidebar: [
-        {
-          text: "快捷导航",
-          link: "/navigation/",
-          collapsible: true,
-          children: [
-            {
-              text: "导航页面",
-              link: "/navigation/",
-              collapsible: true,
-              children: [
-                { text: "快捷导航", link: "/navigation/" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "学习笔记",
-          link: "/notes/",
-          collapsible: true,
-          children: [
-            {
-              text: "笔记页面",
-              link: "/notes/",
-              collapsible: true,
-              children: [
-                { text: "学习笔记", link: "/notes/" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "计算机知识库",
-          link: "/blog/",
-          collapsible: true,
-          children: [
-            {
-              text: "知识库页面",
-              link: "/blog/",
-              collapsible: true,
-              children: [
-                { text: "计算机知识库", link: "/blog/" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "AI 技术专栏",
-          link: "/ai-tech/",
-          collapsible: true,
-          children: [
-            {
-              text: "专栏页面",
-              link: "/ai-tech/",
-              collapsible: true,
-              children: [
-                { text: "AI 技术专栏", link: "/ai-tech/" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "AI 应用技术专栏",
-          link: "/ai-app/",
-          collapsible: true,
-          children: [
-            {
-              text: "专栏页面",
-              link: "/ai-app/",
-              collapsible: true,
-              children: [
-                { text: "AI 应用技术专栏", link: "/ai-app/" },
-              ],
-            },
-          ],
-        },
+        { text: "快捷导航", link: "/navigation/" },
+        { text: "学习笔记", link: "/notes/" },
+        { text: "计算机知识库", link: "/blog/" },
+        { text: "AI 技术专栏", link: "/ai-tech/" },
+        { text: "AI 应用技术专栏", link: "/ai-app/" },
         {
           text: "研究中心",
           link: "/research/",
           collapsible: true,
           children: [
             {
-              text: "科研相关",
-              link: "/research/ky-keyan/",
+              text: "具身智能与 VLA",
+              link: "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/",
               collapsible: true,
               children: [
-                {
-                  text: "具身智能与 VLA",
-                  link: "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/",
-                  collapsible: true,
-                  children: [
-                    "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
-                    "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/vlash-explained.md",
-                  ],
-                },
-                {
-                  text: "数据提取",
-                  link: "/research/ky-keyan/shu-ju-ti-qu/",
-                  collapsible: true,
-                  children: [
-                    "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
-                  ],
-                },
+                "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
+                "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/vlash-explained.md",
+              ],
+            },
+            {
+              text: "数据提取",
+              link: "/research/ky-keyan/shu-ju-ti-qu/",
+              collapsible: true,
+              children: [
+                "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
               ],
             },
           ],
@@ -190,15 +115,8 @@ export default defineUserConfig({
           link: "/guide/",
           collapsible: true,
           children: [
-            {
-              text: "指南文章",
-              link: "/guide/",
-              collapsible: true,
-              children: [
-                "/guide/github-pages-deploy.md",
-                "/guide/template-guide.md",
-              ],
-            },
+            "/guide/github-pages-deploy.md",
+            "/guide/template-guide.md",
           ],
         },
         {
@@ -206,31 +124,10 @@ export default defineUserConfig({
           link: "/entertainment/",
           collapsible: true,
           children: [
-            {
-              text: "娱乐内容",
-              link: "/entertainment/",
-              collapsible: true,
-              children: [
-                "/entertainment/enter1.md",
-              ],
-            },
+            "/entertainment/enter1.md",
           ],
         },
-        {
-          text: "关于我",
-          link: "/about/",
-          collapsible: true,
-          children: [
-            {
-              text: "关于页面",
-              link: "/about/",
-              collapsible: true,
-              children: [
-                { text: "关于我", link: "/about/" },
-              ],
-            },
-          ],
-        },
+        { text: "关于我", link: "/about/" },
     ],
 
     // 图标资源（Iconify，供 navbar 图标与 FontIcon 使用）
