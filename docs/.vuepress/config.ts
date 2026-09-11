@@ -78,6 +78,8 @@ export default defineUserConfig({
     // - 一级分组顺序与 navbar 保持一致
     // - 只保留「一级分组 + 其下的实际页面/子分组」两层，不再有中间的包装分组；
     //   一级分组下只有一个同名同链接页面时，直接退化为普通链接（不再可展开）
+    // - 「有子项的分组」不配 link：点击标题只展开/折叠，不跳转到目录页（这类目录页已由
+    //   plugins.catalog.exclude 排除，不再生成）
     // - 可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
     // - 分组不配 expanded，默认收起，只显示顶层；点击标题展开/收起，进入某栏目时该分组自动展开
     sidebar: [
@@ -93,7 +95,6 @@ export default defineUserConfig({
           children: [
             {
               text: "具身智能与 VLA",
-              link: "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/",
               collapsible: true,
               children: [
                 "/research/ky-keyan/ju-shen-zhi-neng-yu-vla/asyncvla-explained.md",
@@ -102,7 +103,6 @@ export default defineUserConfig({
             },
             {
               text: "数据提取",
-              link: "/research/ky-keyan/shu-ju-ti-qu/",
               collapsible: true,
               children: [
                 "/research/ky-keyan/shu-ju-ti-qu/X平台科技新闻自动检索方案调研.md",
@@ -169,6 +169,12 @@ export default defineUserConfig({
         components: ["Badge", "VPCard"],
       },
       blog: true,
+      // 目录插件：默认会为「没有 README 的目录」自动生成一个目录页（标题取自文件夹名，
+      // 中文目录会变成拼音，很丑）。侧边栏的二级分组只做展开/折叠、不跳转，
+      // 因此这里排除研究中心的子目录，不生成这类落地页。
+      catalog: {
+        exclude: [/^\/research\/ky-keyan\//],
+      },
       mdEnhance: {
         align: true,
         attrs: true,
