@@ -228,10 +228,12 @@ export default defineUserConfig({
     },
 
     // 加密（可选）
-    // 注意：这里填写的是密码的 bcrypt 哈希（不是明文密码）
+    // 注意：这里填写密码的 bcrypt 哈希（不是明文密码）
+    // 已通过 patches/ 补丁移除 theme-hope rc.61 构建端对配置值的二次 hashSync，
+    // 客户端浏览器直接 compareSync(输入密码, 哈希) 比对，明文不出现在仓库/产物中
     encrypt: {
       config: {
-        "/entertainment/": ["$2a$10$hIizGwoPPcNlD6wtqB2rDuOPCMJatEKAref3.dz2YPKyLBSC34Zuy"],
+        "/entertainment/": ["$2a$10$VwRaDfaV937Ea/qC5b.pLOM94TH5/yif5kBZfg3TlHj7UfxPKXtsu"],
       },
     },
 
