@@ -169,6 +169,12 @@ export default defineUserConfig({
     // 比主题自带的 encrypt 门禁更彻底（门禁只是不显示，正文仍在源码里）。
     // 因此这里不再配置 theme.encrypt。
 
+    // Markdown 容器提示框（::: note / tip / warning / danger / info / important / caution）
+    // 主题默认不开这一项，必须显式打开；否则 ::: 语法不会被解析，会原样显示在页面上。
+    markdown: {
+      hint: true,
+    },
+
     // Markdown 增强
     plugins: {
       // 注册卡片组件，供导航页使用
