@@ -94,6 +94,13 @@ export default defineUserConfig({
           collapsible: true,
           children: [
             {
+              text: "科研基础",
+              collapsible: true,
+              children: [
+                "/research/科研基础/科研基础入门01.md",
+              ],
+            },
+            {
               text: "具身智能与 VLA",
               collapsible: true,
               children: [
@@ -171,8 +178,13 @@ export default defineUserConfig({
       blog: true,
       // 目录插件：默认会为「没有 README 的目录」自动生成一个目录页（标题取自文件夹名）。
       // 侧边栏的分组只做展开/折叠、不跳转，不需要这类落地页，因此排除这几处子目录。
+      // 注意「科研基础」目录名是中文，插件匹配的是 page.path（非 ASCII 会被百分号编码），
+      // 所以这里同时给出原文与编码两种写法。
       catalog: {
-        exclude: [/^\/research\/(vla|data-extract)\//],
+        exclude: [
+          /^\/research\/(vla|data-extract)\//,
+          /^\/research\/(科研基础|%E7%A7%91%E7%A0%94%E5%9F%BA%E7%A1%80)\//,
+        ],
       },
       // 贡献者列表来自 git 提交记录，而提交里带有 AI 协作署名
       // （Co-Authored-By: Claude Opus 5 (1M context) / AtomCode …），插件会把它们

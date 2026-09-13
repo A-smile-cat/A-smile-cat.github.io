@@ -34,11 +34,12 @@ dir:
 ## 📚 学习教程
 
 <div class="nav-grid cat-green">
-
 <VPCard title="菜鸟教程" desc="编程入门教程" link="https://www.runoob.com/" logo="https://www.runoob.com/favicon.ico" />
 <VPCard title="廖雪峰官网" desc="Python/Java/Git 教程" link="https://www.liaoxuefeng.com/" logo="https://www.liaoxuefeng.com/favicon.ico" />
 <VPCard title="编程派" desc="编程技术博客" link="https://www.coderbusy.com/" logo="https://www.coderbusy.com/favicon.ico" />
 <VPCard title="LeetCode" desc="算法刷题" link="https://leetcode.cn/" logo="https://leetcode.cn/favicon.ico" />
+
+<VPCard title="计算机技术学习札记" desc="代表性的计算机技术学习笔记" link="https://www.criwits.top/" logo="https://www.criwits.top/favicon.ico" />
 
 </div>
 
@@ -107,7 +108,6 @@ dir:
 ## 💻 开发工具
 
 <div class="nav-grid cat-cyan">
-
 <VPCard title="VS Code" desc="开源代码编辑器" link="https://code.visualstudio.com/" logo="https://code.visualstudio.com/favicon.ico" />
 <VPCard title="Docker Hub" desc="容器镜像仓库" link="https://hub.docker.com/" logo="https://hub.docker.com/favicon.ico" />
 <VPCard title="Postman" desc="API 测试工具" link="https://www.postman.com/" logo="https://www.postman.com/favicon.ico" />
@@ -124,7 +124,6 @@ dir:
 ## 📰 技术资讯
 
 <div class="nav-grid cat-red">
-
 <VPCard title="Hacker News" desc="科技资讯" link="https://news.ycombinator.com/" logo="https://news.ycombinator.com/favicon.ico" />
 <VPCard title="InfoQ" desc="技术社区" link="https://www.infoq.cn/" logo="https://www.infoq.cn/favicon.ico" />
 <VPCard title="36Kr" desc="科技媒体" link="https://36kr.com/" logo="https://36kr.com/favicon.ico" />
