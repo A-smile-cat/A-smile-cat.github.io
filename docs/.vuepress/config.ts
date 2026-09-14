@@ -116,6 +116,8 @@ export default defineUserConfig({
               children: [
                 "/research/科研基础/科研基础入门01.md",
                 "/research/科研基础/科研基础入门02.md",
+                "/research/科研基础/科研基础入门03.md",
+                "/research/科研基础/科研基础入门04.md",
               ],
             },
             {
