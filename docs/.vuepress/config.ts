@@ -128,6 +128,7 @@ export default defineUserConfig({
                 "/research/vla/asyncvla-explained.md",
                 "/research/vla/vlash-explained.md",
                 "/research/vla/go2-edu-guide.md",
+                "/research/vla/dds-middleware.md",
               ],
             },
             {
