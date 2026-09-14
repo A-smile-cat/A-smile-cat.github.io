@@ -83,7 +83,17 @@ export default defineUserConfig({
     // - 可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
     // - 分组不配 expanded，默认收起，只显示顶层；点击标题展开/收起，进入某栏目时该分组自动展开
     sidebar: [
-        { text: "快捷导航", link: "/navigation/" },
+        {
+          text: "快捷导航",
+          link: "/navigation/",
+          collapsible: true,
+          children: [
+            "/navigation/study.md",
+            "/navigation/tools.md",
+            "/navigation/community.md",
+            "/navigation/maintenance-guide.md",
+          ],
+        },
         { text: "学习笔记", link: "/notes/" },
         {
           text: "计算机知识库",
