@@ -114,6 +114,7 @@ export default defineUserConfig({
               children: [
                 "/research/vla/asyncvla-explained.md",
                 "/research/vla/vlash-explained.md",
+                "/research/vla/go2-edu-guide.md",
               ],
             },
             {
