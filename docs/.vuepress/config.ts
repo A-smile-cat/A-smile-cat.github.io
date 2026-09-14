@@ -105,6 +105,7 @@ export default defineUserConfig({
               collapsible: true,
               children: [
                 "/research/科研基础/科研基础入门01.md",
+                "/research/科研基础/科研基础入门02.md",
               ],
             },
             {
