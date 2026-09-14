@@ -85,7 +85,14 @@ export default defineUserConfig({
     sidebar: [
         { text: "快捷导航", link: "/navigation/" },
         { text: "学习笔记", link: "/notes/" },
-        { text: "计算机知识库", link: "/blog/" },
+        {
+          text: "计算机知识库",
+          link: "/blog/",
+          collapsible: true,
+          children: [
+            "/blog/从零到一：用书签管理器掌握 HTML CSS JS 三件套.md",
+          ],
+        },
         { text: "AI 技术专栏", link: "/ai-tech/" },
         { text: "AI 应用技术专栏", link: "/ai-app/" },
         {

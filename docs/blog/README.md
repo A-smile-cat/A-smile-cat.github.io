@@ -1,6 +1,5 @@
 ---
 title: 计算机知识库
-layout: BlogHome
 dir:
   order: 3
   link: true
