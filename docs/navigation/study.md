@@ -46,6 +46,8 @@ tags:
 <VPCard title="廖雪峰官网" desc="Python/Java/Git 教程" link="https://www.liaoxuefeng.com/" logo="https://www.liaoxuefeng.com/favicon.ico" />
 <VPCard title="编程派" desc="编程技术博客" link="https://www.coderbusy.com/" logo="https://www.coderbusy.com/favicon.ico" />
 <VPCard title="LeetCode" desc="算法刷题" link="https://leetcode.cn/" logo="https://leetcode.cn/favicon.ico" />
+<VPCard title="ACM Digital Library" desc="ACM 官方文献库，收录全部 ACM 期刊与会议" link="https://dl.acm.org/" logo="https://dl.acm.org/favicon.ico" />
+<VPCard title="IEEE Xplore" desc="IEEE 官方文献库，期刊/会议/标准/电子书" link="https://ieeexplore.ieee.org/Xplore/home.jsp" logo="https://ieeexplore.ieee.org/favicon.ico" />
 
 <VPCard title="计算机技术学习札记" desc="代表性的计算机技术学习笔记" link="https://www.criwits.top/" logo="https://www.criwits.top/favicon.ico" />
 
