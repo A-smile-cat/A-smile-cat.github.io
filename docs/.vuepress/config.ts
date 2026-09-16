@@ -103,7 +103,14 @@ export default defineUserConfig({
             "/blog/从零到一：用书签管理器掌握 HTML CSS JS 三件套.md",
           ],
         },
-        { text: "AI 技术专栏", link: "/ai-tech/" },
+        {
+          text: "AI 技术专栏",
+          link: "/ai-tech/",
+          collapsible: true,
+          children: [
+            "/ai-tech/VLA与具身智能入门笔记.md",
+          ],
+        },
         { text: "AI 应用技术专栏", link: "/ai-app/" },
         {
           text: "研究中心",
