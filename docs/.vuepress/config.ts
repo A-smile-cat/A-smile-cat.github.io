@@ -91,6 +91,7 @@ export default defineUserConfig({
             "/navigation/study.md",
             "/navigation/tools.md",
             "/navigation/community.md",
+            "/navigation/magic-websites.md",
             "/navigation/maintenance-guide.md",
           ],
         },
