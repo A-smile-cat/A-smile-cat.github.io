@@ -355,3 +355,27 @@ $nav-accents: (
     line-height: 1.4;
   }
 }
+
+/* ===== 主页：隐藏文章列表，改为「关于我」占位 ===== */
+// BlogHome 布局滑下 Hero 后依次是：项目卡片 → 文章列表 → 侧栏博主信息 → 正文。
+// 主页定位改为作者主页：项目卡片与文章列表隐藏，正文用 README.md 的关于我区块，
+// 右侧博主信息面板（头像/统计/社交）保留。
+.vp-blog-home {
+  .blog-page-wrapper {
+    // 隐藏项目卡片面板与文章列表，只留侧栏和正文
+    .vp-project-panel {
+      display: none;
+    }
+
+    .vp-blog-main {
+      .vp-article-list {
+        display: none;
+      }
+
+      // 正文（关于我区块）撑满主栏
+      .vp-page-content {
+        max-width: 100%;
+      }
+    }
+  }
+}

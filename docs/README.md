@@ -36,4 +36,18 @@ features:
 
 footer: Powered by VuePress | Theme Hope
 copyright: Copyright © 2024 - present A-smile-cat
+
 ---
+
+## 👋 关于我
+
+::: tip 筹备中
+这里即将上线我的完整介绍——包括技术方向、项目经历和正在折腾的东西，敬请期待。
+:::
+
+- 🐱 一只敲代码时会碎碎念的程序喵
+- 💻 热爱技术，享受编码的乐趣
+- 🚀 持续学习，不断成长
+- 📍 更多动态：逛一逛上方的[快捷导航](/navigation/)和[学习笔记](/notes/)吧
+
+<!-- 关于我占位区块：内容完善后直接替换本区域即可 -->

@@ -60,6 +60,9 @@ export default defineUserConfig({
   ],
 
   theme: hopeTheme({
+    // 站点域名：seo / sitemap / feed 插件依赖它生成 canonical 链接与 sitemap.xml
+    hostname: "https://a-smile-cat.github.io",
+
     // 导航栏
     navbar: [
       { text: "快捷导航", link: "/navigation/", icon: "mdi:compass" },
@@ -209,6 +212,11 @@ export default defineUserConfig({
 
     // Markdown 增强
     plugins: {
+      // SEO：为每个页面注入 meta 描述、Open Graph、canonical 链接等，
+      // 提升搜索引擎（Google/Bing/百度）的收录与排名效果
+      seo: true,
+      // 站点地图：生成 sitemap.xml，供搜索站长平台（Google Search Console 等）提交
+      sitemap: true,
       // 注册卡片组件，供导航页使用
       components: {
         components: ["Badge", "VPCard"],
