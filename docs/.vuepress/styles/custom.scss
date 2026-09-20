@@ -357,25 +357,39 @@ $nav-accents: (
 }
 
 /* ===== 主页：隐藏文章列表，改为「关于我」占位 ===== */
-// BlogHome 布局滑下 Hero 后依次是：项目卡片 → 文章列表 → 侧栏博主信息 → 正文。
-// 主页定位改为作者主页：项目卡片与文章列表隐藏，正文用 README.md 的关于我区块，
-// 右侧博主信息面板（头像/统计/社交）保留。
-.vp-blog-home {
+// BlogHome 布局的 DOM：vp-page.vp-blog-home > [Hero, wrapper(main 文章列表 + aside 信息栏),
+// theme-hope-content(README 正文)]。正文是页面级元素，不在主栏里。
+// 主页定位改为作者主页：隐藏项目卡片与文章列表，正文作为唯一主栏内容居中显示。
+.vp-page.vp-blog-home {
+  // 正文（关于我区块）：与 blog-page-wrapper 同层的唯一内容列，居中、限宽
+  > .theme-hope-content {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+
+    @media (max-width: hope-config.$pad) {
+      padding: 0 1rem 2rem;
+    }
+
+    @media (max-width: hope-config.$mobile) {
+      padding: 0 1rem 2rem;
+    }
+  }
+
   .blog-page-wrapper {
-    // 隐藏项目卡片面板与文章列表，只留侧栏和正文
-    .vp-project-panel {
+    // 隐藏项目卡片面板与文章列表
+    .vp-project-panel,
+    .vp-article-list {
       display: none;
     }
 
-    .vp-blog-main {
-      .vp-article-list {
-        display: none;
-      }
-
-      // 正文（关于我区块）撑满主栏
-      .vp-page-content {
-        max-width: 100%;
-      }
+    // 隐藏列表后主栏没有内容，收紧整行高度，避免留下大片空白
+    main.vp-blog-main {
+      display: none;
     }
+
+    // 移动端信息栏本来隐藏，桌面端保留右侧博主信息卡
   }
 }
