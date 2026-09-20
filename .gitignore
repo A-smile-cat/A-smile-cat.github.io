@@ -16,3 +16,10 @@ docs/.vuepress/config.ts.*.mjs
 
 # 协作工具本地数据（工作记录等）
 .workbuddy/
+
+# 文章草稿（不发布）
+drafts/
+
+# AI 编码助手本地数据
+.atomcode/
+.claude/
