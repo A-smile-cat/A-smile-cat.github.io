@@ -323,6 +323,54 @@ const EncryptedContent = defineComponent({
   },
 });
 
+/**
+ * Hero 头像轮播：把 BlogHero 里的单个 <img class="vp-blog-hero-image">
+ * 原地替换为轮播容器（原图为第一帧 + 追加图淡入淡出轮换）。
+ * 轮播图列表可改 AVATARS 常量；与打字机动画一样用轮询等待 Hero 渲染。
+ */
+const AVATARS = ["/logo.png", "/avatar-1.png", "/avatar-2.png", "/avatar-3.png"];
+const AVATAR_INTERVAL = 3000;
+
+const startAvatarCarousel = (): (() => void) | null => {
+  const img = document.querySelector<HTMLImageElement>(
+    ".vp-blog-hero .vp-blog-hero-image"
+  );
+  if (!img || img.dataset.carousel) return img?.dataset.carousel ? () => {} : null;
+  img.dataset.carousel = "init";
+
+  const frame = document.createElement("div");
+  frame.className = "avatar-carousel-frame";
+  img.replaceWith(frame);
+  frame.appendChild(img);
+
+  AVATARS.slice(1).forEach((src, i) => {
+    const extra = img.cloneNode() as HTMLImageElement;
+    extra.src = src;
+    extra.dataset.carouselIndex = String(i + 1);
+    frame.appendChild(extra);
+  });
+
+  const frames = [...frame.querySelectorAll<HTMLImageElement>("img")];
+  let index = 0;
+  let timer = 0;
+  let stopped = false;
+
+  timer = window.setInterval(() => {
+    if (stopped || !frame.isConnected) {
+      stopped = true;
+      window.clearInterval(timer);
+      return;
+    }
+    index = (index + 1) % frames.length;
+    frames.forEach((f, i) => f.classList.toggle("carousel-active", i === index));
+  }, AVATAR_INTERVAL);
+
+  return () => {
+    stopped = true;
+    window.clearInterval(timer);
+  };
+};
+
 export default defineClientConfig({
   enhance({ app }) {
     app.component("EncryptedContent", EncryptedContent);
@@ -331,6 +379,7 @@ export default defineClientConfig({
     const route = useRoute();
 
     let stopTyping: (() => void) | null = null;
+    let stopCarousel: (() => void) | null = null;
     let retryTimer = 0;
     let stopWatch: (() => void) | undefined;
 
@@ -338,6 +387,8 @@ export default defineClientConfig({
     const startWithRetry = () => {
       stopTyping?.();
       stopTyping = null;
+      stopCarousel?.();
+      stopCarousel = null;
       window.clearInterval(retryTimer);
 
       let attempts = 0;
@@ -346,8 +397,9 @@ export default defineClientConfig({
           window.clearInterval(retryTimer);
           return;
         }
-        stopTyping = startTypingEffect();
-        if (stopTyping) window.clearInterval(retryTimer);
+        if (!stopTyping) stopTyping = startTypingEffect();
+        if (!stopCarousel) stopCarousel = startAvatarCarousel();
+        if (stopTyping && stopCarousel) window.clearInterval(retryTimer);
       }, 200);
     };
 
@@ -365,6 +417,8 @@ export default defineClientConfig({
             window.clearInterval(retryTimer);
             stopTyping?.();
             stopTyping = null;
+            stopCarousel?.();
+            stopCarousel = null;
           }
         }
       );
@@ -374,6 +428,7 @@ export default defineClientConfig({
       stopWatch?.();
       window.clearInterval(retryTimer);
       stopTyping?.();
+      stopCarousel?.();
     });
   },
 });

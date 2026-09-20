@@ -359,37 +359,86 @@ $nav-accents: (
 /* ===== 主页：隐藏文章列表，改为「关于我」占位 ===== */
 // BlogHome 布局的 DOM：vp-page.vp-blog-home > [Hero, wrapper(main 文章列表 + aside 信息栏),
 // theme-hope-content(README 正文)]。正文是页面级元素，不在主栏里。
-// 主页定位改为作者主页：隐藏项目卡片与文章列表，正文作为唯一主栏内容居中显示。
+// 主页定位改为作者主页：内容列与右侧博主信息卡并排（PC），移动端单列。
 .vp-page.vp-blog-home {
-  // 正文（关于我区块）：与 blog-page-wrapper 同层的唯一内容列，居中、限宽
-  > .theme-hope-content {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 2rem 2rem;
+  // PC：两列网格 —— 左侧正文，右侧信息卡
+  @media (min-width: hope-config.$tablet) {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 300px;
+    justify-content: center;
+    column-gap: 1rem;
+    align-items: start;
 
-    @media (max-width: hope-config.$pad) {
-      padding: 0 1rem 2rem;
+    // Hero 横跨两列
+    > .vp-blog-hero {
+      grid-column: 1 / -1;
     }
 
-    @media (max-width: hope-config.$mobile) {
+    // 打散包装层，让 aside 直接参与页面网格
+    > .blog-page-wrapper {
+      display: contents;
+    }
+
+    // 正文占左列
+    > .theme-hope-content {
+      grid-column: 1;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 0 2rem;
+    }
+
+    // 信息卡占右列并吸顶
+    > .blog-page-wrapper > .vp-blog-info-wrapper {
+      grid-column: 2;
+      margin-top: 0.75rem;
+    }
+  }
+
+  // 平板/移动端：单列，仅显示正文（信息卡在窄屏本来就被主题隐藏）
+  @media (max-width: hope-config.$tablet) {
+    > .blog-page-wrapper {
+      display: none;
+    }
+
+    > .theme-hope-content {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
       padding: 0 1rem 2rem;
     }
   }
 
-  .blog-page-wrapper {
-    // 隐藏项目卡片面板与文章列表
-    .vp-project-panel,
-    .vp-article-list {
-      display: none;
-    }
+  // 隐藏项目卡片面板与文章列表，主栏不再需要
+  .vp-project-panel,
+  .vp-article-list,
+  main.vp-blog-main {
+    display: none;
+  }
+}
 
-    // 隐藏列表后主栏没有内容，收紧整行高度，避免留下大片空白
-    main.vp-blog-main {
-      display: none;
-    }
+/* ===== Hero 头像轮播 ===== */
+// client.ts 的 startAvatarCarousel 会把 Hero 单张头像 img 包进轮播容器，
+// 追加的帧通过克隆生成，这里控制帧叠放与切换过渡。
+.vp-blog-hero .avatar-carousel-frame {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 1.5rem auto;
 
-    // 移动端信息栏本来隐藏，桌面端保留右侧博主信息卡
+  .vp-blog-hero-image {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    animation: none !important; // 覆盖原单图的入场动画，避免与轮播切换冲突
+
+    &.carousel-active,
+    &:first-child:not(.carousel-init) {
+      opacity: 1;
+      visibility: visible;
+      position: relative; // 第一帧占位撑开容器
+    }
   }
 }
