@@ -24,19 +24,13 @@ code, pre, kbd, samp {
 
 /* ===== 首屏 Hero 区域增强 ===== */
 
-// 背景图缓慢缩放动画
-.vp-blog-hero-bg,
-[class*="blog-hero"] [class*="bg"],
-[class*="hero"] [class*="bg"] {
+// 背景图缓慢缩放动画（背景层实际类名是 .vp-blog-mask，由内联 style 提供背景图）
+.vp-blog-hero .vp-blog-mask {
   animation: bgZoom 20s ease-in-out infinite alternate !important;
 }
 
-html.dark {
-  .vp-blog-hero-bg,
-  [class*="blog-hero"] [class*="bg"],
-  [class*="hero"] [class*="bg"] {
-    filter: brightness(0.6);
-  }
+html.dark .vp-blog-hero .vp-blog-mask {
+  filter: brightness(0.6);
 }
 
 @keyframes bgZoom {
@@ -357,69 +351,30 @@ $nav-accents: (
 }
 
 /* ===== 主页：隐藏文章列表，改为「关于我」占位 ===== */
-// BlogHome 布局的 DOM：vp-page.vp-blog-home > [Hero, wrapper(main 文章列表 + aside 信息栏),
-// theme-hope-content(README 正文)]。正文是页面级元素，不在主栏里。
-// 主页定位改为作者主页：内容列与右侧博主信息卡并排（PC），移动端单列。
+// BlogHome 布局的 DOM：vp-page.vp-blog-home > [Hero, wrapper(main + aside 信息栏),
+// theme-hope-content(README 正文)]。client.ts 的 relocateHomeContent() 会把正文
+// 搬进主栏 main，于是主题原有 flex 布局自然呈现「左正文 + 右信息卡」。
 .vp-page.vp-blog-home {
-  // PC：两列网格 —— 左侧正文，右侧信息卡
-  @media (min-width: hope-config.$tablet) {
-    display: grid;
-    grid-template-columns: minmax(0, 780px) 300px;
-    justify-content: center;
-    column-gap: 1rem;
-    align-items: start;
-
-    // Hero 横跨两列
-    > .vp-blog-hero {
-      grid-column: 1 / -1;
-    }
-
-    // 打散包装层，让 aside 直接参与页面网格
-    > .blog-page-wrapper {
-      display: contents;
-    }
-
-    // 正文占左列
-    > .theme-hope-content {
-      grid-column: 1;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 0 0 2rem;
-    }
-
-    // 信息卡占右列并吸顶
-    > .blog-page-wrapper > .vp-blog-info-wrapper {
-      grid-column: 2;
-      margin-top: 0.75rem;
-    }
-  }
-
-  // 平板/移动端：单列，仅显示正文（信息卡在窄屏本来就被主题隐藏）
-  @media (max-width: hope-config.$tablet) {
-    > .blog-page-wrapper {
+  .blog-page-wrapper {
+    // 隐藏项目卡片面板与文章列表（正文由 JS 搬进主栏）
+    .vp-project-panel,
+    .vp-article-list {
       display: none;
     }
-
-    > .theme-hope-content {
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
   }
 
-  // 隐藏项目卡片面板与文章列表，主栏不再需要
-  .vp-project-panel,
-  .vp-article-list,
+  // 正文列：与文章列表同位置，主栏 flex 布局自动占位
   main.vp-blog-main {
-    display: none;
+    .theme-hope-content {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 0 2rem;
+    }
   }
 }
 
 /* ===== Hero 头像轮播 ===== */
-// client.ts 的 startAvatarCarousel 会把 Hero 单张头像 img 包进轮播容器，
-// 追加的帧通过克隆生成，这里控制帧叠放与切换过渡。
+// client.ts 的 startAvatarCarousel 把亮色头像 img 包进轮播容器并逐帧切换 .carousel-active
 .vp-blog-hero .avatar-carousel-frame {
   position: relative;
   display: block;
@@ -434,11 +389,10 @@ $nav-accents: (
     transition: opacity 0.8s ease, visibility 0.8s ease;
     animation: none !important; // 覆盖原单图的入场动画，避免与轮播切换冲突
 
-    &.carousel-active,
-    &:first-child:not(.carousel-init) {
+    &.carousel-active {
       opacity: 1;
       visibility: visible;
-      position: relative; // 第一帧占位撑开容器
+      position: relative; // 当前帧占位撑开容器
     }
   }
 }

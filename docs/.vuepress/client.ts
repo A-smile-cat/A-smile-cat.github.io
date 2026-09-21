@@ -324,51 +324,78 @@ const EncryptedContent = defineComponent({
 });
 
 /**
- * Hero 头像轮播：把 BlogHero 里的单个 <img class="vp-blog-hero-image">
- * 原地替换为轮播容器（原图为第一帧 + 追加图淡入淡出轮换）。
- * 轮播图列表可改 AVATARS 常量；与打字机动画一样用轮询等待 Hero 渲染。
+ * Hero 头像轮播：把 BlogHero 里的亮色头像 <img>（排除 .dark 变体）
+ * 原地替换为轮播容器，帧之间淡入淡出轮换。
  */
 const AVATARS = ["/logo.png", "/avatar-1.png", "/avatar-2.png", "/avatar-3.png"];
 const AVATAR_INTERVAL = 3000;
 
 const startAvatarCarousel = (): (() => void) | null => {
-  const img = document.querySelector<HTMLImageElement>(
-    ".vp-blog-hero .vp-blog-hero-image"
-  );
-  if (!img || img.dataset.carousel) return img?.dataset.carousel ? () => {} : null;
-  img.dataset.carousel = "init";
+  // 亮色/暗色模式各有一张头像 img，分别包进各自的轮播容器
+  const imgs = [
+    ...document.querySelectorAll<HTMLImageElement>(
+      ".vp-blog-hero .vp-blog-hero-image.light"
+    ),
+    ...document.querySelectorAll<HTMLImageElement>(
+      ".vp-blog-hero .vp-blog-hero-image.dark"
+    ),
+  ];
+  if (!imgs.length) return null;
+  if (imgs[0].dataset.carousel) return () => {};
+  imgs.forEach((img) => (img.dataset.carousel = "init"));
 
-  const frame = document.createElement("div");
-  frame.className = "avatar-carousel-frame";
-  img.replaceWith(frame);
-  frame.appendChild(img);
-
-  AVATARS.slice(1).forEach((src, i) => {
-    const extra = img.cloneNode() as HTMLImageElement;
-    extra.src = src;
-    extra.dataset.carouselIndex = String(i + 1);
-    frame.appendChild(extra);
-  });
-
-  const frames = [...frame.querySelectorAll<HTMLImageElement>("img")];
-  let index = 0;
-  let timer = 0;
+  const timers: number[] = [];
   let stopped = false;
 
-  timer = window.setInterval(() => {
-    if (stopped || !frame.isConnected) {
-      stopped = true;
-      window.clearInterval(timer);
-      return;
-    }
-    index = (index + 1) % frames.length;
-    frames.forEach((f, i) => f.classList.toggle("carousel-active", i === index));
-  }, AVATAR_INTERVAL);
+  imgs.forEach((img) => {
+    const frame = document.createElement("div");
+    frame.className = "avatar-carousel-frame";
+    img.replaceWith(frame);
+
+    AVATARS.forEach((src, i) => {
+      const item = i === 0 ? img : (img.cloneNode() as HTMLImageElement);
+      if (i > 0) item.src = src;
+      item.classList.toggle("carousel-active", i === 0);
+      frame.appendChild(item);
+    });
+
+    const frames = [...frame.querySelectorAll<HTMLImageElement>("img")];
+    let index = 0;
+
+    timers.push(
+      window.setInterval(() => {
+        if (stopped || !frame.isConnected) {
+          stopped = true;
+          return;
+        }
+        index = (index + 1) % frames.length;
+        frames.forEach((f, i) =>
+          f.classList.toggle("carousel-active", i === index)
+        );
+      }, AVATAR_INTERVAL)
+    );
+  });
 
   return () => {
     stopped = true;
-    window.clearInterval(timer);
+    timers.forEach((t) => window.clearInterval(t));
   };
+};
+
+/**
+ * 主页布局重排：把页面级的「关于我」正文（.theme-hope-content）
+ * 搬进主栏 main，替换被隐藏的文章列表，让主题原有 flex 布局
+ * 自然呈现「左正文 + 右信息卡」。
+ */
+const relocateHomeContent = (): boolean => {
+  const page = document.querySelector(".vp-page.vp-blog-home");
+  const main = page?.querySelector<HTMLDivElement>("main.vp-blog-main");
+  const content = page?.querySelector<HTMLDivElement>(
+    ":scope > .theme-hope-content"
+  );
+  if (!main || !content) return false;
+  if (content.parentElement !== main) main.appendChild(content);
+  return true;
 };
 
 export default defineClientConfig({
@@ -399,7 +426,8 @@ export default defineClientConfig({
         }
         if (!stopTyping) stopTyping = startTypingEffect();
         if (!stopCarousel) stopCarousel = startAvatarCarousel();
-        if (stopTyping && stopCarousel) window.clearInterval(retryTimer);
+        const relocated = relocateHomeContent();
+        if (stopTyping && stopCarousel && relocated) window.clearInterval(retryTimer);
       }, 200);
     };
 
