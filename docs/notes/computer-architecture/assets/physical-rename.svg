@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">物理寄存器重命名：把「名字相关」从硬件上抹掉</text>
+  <text x="450" y="54" text-anchor="middle" font-size="13" fill="#6b7280">动机：Tomasulo 的 CDB 上数据搬运太重、多输入选通器拖慢时钟 —— 现代处理器的主流做法</text>
+
+  <!-- 对比 -->
+  <g text-anchor="middle">
+    <rect x="60" y="80" width="360" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="240" y="108" font-size="14" font-weight="bold" fill="#1e3a8a">tag 式重命名（Tomasulo）</text>
+    <text x="240" y="132" font-size="12" fill="#1e40af">架构寄存器堆 32 个 + 保留站行号当「临时名」</text>
+    <text x="240" y="154" font-size="12" fill="#1e40af">结果要广播到所有 RS 与寄存器堆</text>
+    <text x="240" y="176" font-size="12" fill="#dc2626">CDB 数据流量大、等待者多</text>
+    <text x="240" y="198" font-size="12" fill="#dc2626">长总线 + 多输入 MUX 拖慢时钟</text>
+
+    <rect x="480" y="80" width="360" height="150" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="660" y="108" font-size="14" font-weight="bold" fill="#166534">物理寄存器式重命名</text>
+    <text x="660" y="132" font-size="12" fill="#166534">取消独立架构寄存器堆的概念</text>
+    <text x="660" y="154" font-size="12" fill="#166534">一个大物理寄存器堆（N ≫ 32）承载所有值</text>
+    <text x="660" y="176" font-size="12" fill="#166534">重命名表把架构寄存器映射到物理寄存器</text>
+    <text x="660" y="198" font-size="12" fill="#166534">用空闲链（free list）分配 / 回收物理寄存器</text>
+  </g>
+
+  <!-- 三大组件 -->
+  <g text-anchor="middle">
+    <rect x="60"  y="260" width="250" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="185" y="290" font-size="15" font-weight="bold" fill="#1e3a8a">重命名表 RAT</text>
+    <text x="185" y="316" font-size="12" fill="#1e40af">R0…R31 → P*（哪个物理</text>
+    <text x="185" y="338" font-size="12" fill="#1e40af">寄存器存着该架构寄存器</text>
+    <text x="185" y="360" font-size="12" fill="#1e40af">的最新值），MIPS 32 项</text>
+
+    <rect x="330" y="260" width="250" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="455" y="290" font-size="15" font-weight="bold" fill="#1e3a8a">物理寄存器堆</text>
+    <text x="455" y="316" font-size="12" fill="#1e40af">P0…Pn（N ≫ 32），每个有</text>
+    <text x="455" y="338" font-size="12" fill="#1e40af">p 标志位：p=1 表示已被</text>
+    <text x="455" y="360" font-size="12" fill="#1e40af">提交（committed）的值</text>
+
+    <rect x="600" y="260" width="240" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="720" y="290" font-size="15" font-weight="bold" fill="#1e3a8a">空闲链 Free List</text>
+    <text x="720" y="316" font-size="12" fill="#1e40af">可分配的物理寄存器</text>
+    <text x="720" y="338" font-size="12" fill="#1e40af">不够分时流水线停顿</text>
+    <text x="720" y="360" font-size="12" fill="#1e40af">（等效于 RS 满的停顿）</text>
+  </g>
+
+  <!-- 重命名示例 -->
+  <text x="50" y="424" font-size="14" font-weight="bold" fill="#374151">重命名示例（架构寄存器 R1/R3/R6 各写两次，WAR / WAW 自动消失）：</text>
+  <g font-size="12.5">
+    <text x="90" y="452" fill="#111827">1. ld  R1, 0(R3)</text><text x="330" y="452" fill="#16a34a">→ ld  P1, (Px)</text><text x="560" y="452" fill="#6b7280">R1 的新值放 P1</text>
+    <text x="90" y="478" fill="#111827">2. add R3, R1, 4</text><text x="330" y="478" fill="#16a34a">→ add P2, P1, 4</text><text x="560" y="478" fill="#6b7280">R3 → P2（旧 P3 无所谓）</text>
+    <text x="90" y="504" fill="#111827">3. sub R6, R7, R6</text><text x="330" y="504" fill="#16a34a">→ sub P3, Py, Pz</text><text x="560" y="504" fill="#6b7280">R6 → P3</text>
+    <text x="90" y="530" fill="#111827">4. add R3, R3, R6</text><text x="330" y="530" fill="#16a34a">→ add P4, P2, P3</text><text x="560" y="530" fill="#b45309">R3 再次写 → 新分 P4；与 2 是 WAW，但写不同物理寄存器，互不干扰</text>
+    <text x="90" y="556" fill="#111827">5. ld  R6, 0(R1)</text><text x="330" y="556" fill="#16a34a">→ ld  P5, (P1)</text><text x="560" y="556" fill="#b45309">R6 → P5；与 3 是 WAR，3 读的是 Py/Pz，不受影响</text>
+  </g>
+
+  <!-- 回收 -->
+  <rect x="50" y="576" width="800" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+  <text x="450" y="598" text-anchor="middle" font-size="12.5" fill="#92400e">回收时机：同一架构寄存器的「下一次写」commit 时，旧的物理寄存器才归还空闲链（例：指令 4 commit 时 P2 才可重用）</text>
+</svg>

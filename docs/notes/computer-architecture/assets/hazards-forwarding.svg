@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">数据相关（RAW）的两种解法：停顿 vs 前递</text>
+
+  <!-- 上半：停顿 -->
+  <text x="50" y="66" font-size="14" font-weight="bold" fill="#374151">情形：add 写 R1，紧接着的 sub 读 R1（距离 dist = 1）—— 无前递只能靠停顿（气泡）</text>
+  <g font-size="11" text-anchor="middle">
+    <text x="70" y="96" fill="#6b7280">周期→</text>
+    <text x="120" y="96" fill="#6b7280">1</text><text x="220" y="96" fill="#6b7280">2</text><text x="320" y="96" fill="#6b7280">3</text><text x="420" y="96" fill="#6b7280">4</text><text x="520" y="96" fill="#6b7280">5</text><text x="620" y="96" fill="#6b7280">6</text><text x="720" y="96" fill="#6b7280">7</text><text x="820" y="96" fill="#6b7280">8</text>
+    <text x="40" y="130" font-size="11" fill="#374151">add</text>
+    <rect x="70"  y="108" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="120" y="128">IF</text>
+    <rect x="170" y="108" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="128">ID</text>
+    <rect x="270" y="108" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="320" y="128">EX</text>
+    <rect x="370" y="108" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="420" y="128">MEM</text>
+    <rect x="470" y="108" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="128">WB</text>
+    <text x="40" y="170" font-size="11" fill="#374151">sub</text>
+    <rect x="170" y="148" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="168">IF</text>
+    <rect x="270" y="148" width="100" height="30" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="5 3"/><text x="320" y="168" fill="#9ca3af">※</text>
+    <rect x="370" y="148" width="100" height="30" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="5 3"/><text x="420" y="168" fill="#9ca3af">※</text>
+    <rect x="470" y="148" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="168">ID</text>
+    <rect x="570" y="148" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="620" y="168">EX</text>
+    <rect x="670" y="148" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="720" y="168">MEM</text>
+    <rect x="770" y="148" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="820" y="168">WB</text>
+  </g>
+  <text x="460" y="208" font-size="12" fill="#b91c1c">※ 两个气泡：sub 在 ID 停着等 add 在第 5 周期把 R1 写回寄存器堆，白白损失 2 个周期</text>
+
+  <!-- 分隔 -->
+  <line x1="50" y1="228" x2="850" y2="228" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- 下半：前递 -->
+  <text x="50" y="260" font-size="14" font-weight="bold" fill="#374151">前递 / 旁路（forwarding / bypassing）：结果一产生就直接抄近路送回去，不必等写回</text>
+  <g font-size="11" text-anchor="middle">
+    <text x="70" y="290" fill="#6b7280">周期→</text>
+    <text x="120" y="290" fill="#6b7280">1</text><text x="220" y="290" fill="#6b7280">2</text><text x="320" y="290" fill="#6b7280">3</text><text x="420" y="290" fill="#6b7280">4</text><text x="520" y="290" fill="#6b7280">5</text><text x="620" y="290" fill="#6b7280">6</text>
+    <text x="40" y="326" font-size="11" fill="#374151">add</text>
+    <rect x="70"  y="304" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="120" y="324">IF</text>
+    <rect x="170" y="304" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="324">ID</text>
+    <rect x="270" y="304" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="320" y="324">EX</text>
+    <rect x="370" y="304" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="420" y="324">MEM</text>
+    <rect x="470" y="304" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="324">WB</text>
+    <text x="40" y="366" font-size="11" fill="#374151">sub</text>
+    <rect x="170" y="344" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="364">IF</text>
+    <rect x="270" y="344" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="320" y="364">ID</text>
+    <rect x="370" y="344" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="420" y="364">EX</text>
+    <rect x="470" y="344" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="364">MEM</text>
+    <rect x="570" y="344" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="620" y="364">WB</text>
+  </g>
+  <!-- 前递箭头：add EX 末 → sub EX 开 -->
+  <path d="M 370 334 C 400 334, 390 356, 370 356" stroke="none"/>
+  <path d="M 366 334 L 366 344" stroke="none"/>
+  <path d="M 374 334 C 420 344, 400 352, 372 356" stroke="#dc2626" stroke-width="2.5" fill="none" marker-end="url(#aR2)"/>
+  <text x="452" y="404" font-size="12" fill="#dc2626">EX/MEM 阶段边界处把 ALU 结果直接送回 ALU 输入（前递路径 + 冲突检测 + 选通器三件套）</text>
+
+  <!-- load-use -->
+  <rect x="50" y="428" width="800" height="170" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="70" y="456" font-size="14" font-weight="bold" fill="#9a3412">前递救不了的场合：load-use 冒险</text>
+  <text x="70" y="478" font-size="12" fill="#7c2d12">lw 的数据要到第 4 级（MEM）末尾才读出来，而紧随其后的指令在第 3 级（EX）就要用 —— 数据在时间上根本追不上</text>
+  <g font-size="11" text-anchor="middle">
+    <text x="40" y="512" font-size="11" fill="#374151">lw</text>
+    <rect x="70"  y="490" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="120" y="510">IF</text>
+    <rect x="170" y="490" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="510">ID</text>
+    <rect x="270" y="490" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="320" y="510">EX</text>
+    <rect x="370" y="490" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="420" y="510">MEM</text>
+    <rect x="470" y="490" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="510">WB</text>
+    <text x="40" y="552" font-size="11" fill="#374151">add</text>
+    <rect x="170" y="530" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="220" y="550">IF</text>
+    <rect x="270" y="530" width="100" height="30" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="5 3"/><text x="320" y="550" fill="#9ca3af">停顿</text>
+    <rect x="370" y="530" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="420" y="550">ID</text>
+    <rect x="470" y="530" width="100" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="520" y="550">EX</text>
+  </g>
+  <path d="M 470 500 C 500 500, 480 538, 474 540" stroke="#dc2626" stroke-width="2.5" fill="none" marker-end="url(#aR2)"/>
+  <text x="600" y="560" font-size="12" fill="#9a3412">只能停顿 1 拍，然后 MEM→EX 前递；编译器可通过指令调度（填入无关指令）避免这一拍</text>
+
+  <defs>
+    <marker id="aR2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#dc2626"/></marker>
+  </defs>
+</svg>

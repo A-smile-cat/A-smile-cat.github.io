@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="470" fill="#ffffff"/>
+  <text x="450" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">32 位 ALU：1 位切片级联与标志位生成</text>
+  <text x="450" y="54" text-anchor="middle" font-size="13" fill="#6b7280">行波进位结构 —— 高位的运算要等低位的进位传上来</text>
+
+  <!-- 1-bit ALU 0 -->
+  <rect x="60" y="120" width="120" height="90" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="120" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e3a8a">1-bit ALU</text>
+  <text x="120" y="170" text-anchor="middle" font-size="12" fill="#1e40af">bit 0（LSB）</text>
+  <text x="120" y="190" text-anchor="middle" font-size="11" fill="#334155">AND / OR / ADD</text>
+  <text x="52" y="140" text-anchor="end" font-size="12" fill="#111827">A0</text>
+  <text x="52" y="200" text-anchor="end" font-size="12" fill="#111827">B0</text>
+  <text x="120" y="106" text-anchor="middle" font-size="11" fill="#6b7280">Cin0 = Bnegate（减法置 1）</text>
+  <path d="M 120 112 L 120 120" stroke="#6b7280" stroke-width="2"/>
+  <path d="M 60 140 L 60 140" stroke="none"/>
+  <path d="M 40 136 L 60 136" stroke="#111827" stroke-width="1.5"/>
+  <path d="M 40 196 L 60 196" stroke="#111827" stroke-width="1.5"/>
+
+  <!-- 1-bit ALU 1 -->
+  <rect x="260" y="120" width="120" height="90" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="320" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e3a8a">1-bit ALU</text>
+  <text x="320" y="170" text-anchor="middle" font-size="12" fill="#1e40af">bit 1</text>
+  <path d="M 180 210 L 230 210 L 230 240 L 320 240 L 320 210" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrR)"/>
+  <text x="250" y="232" text-anchor="middle" font-size="11" fill="#dc2626">Cout0 = Cin1</text>
+  <path d="M 240 136 L 260 136" stroke="#111827" stroke-width="1.5"/>
+  <path d="M 240 196 L 260 196" stroke="#111827" stroke-width="1.5"/>
+
+  <!-- 省略号 -->
+  <text x="475" y="172" text-anchor="middle" font-size="22" fill="#6b7280">……</text>
+
+  <!-- 1-bit ALU 31 -->
+  <rect x="560" y="120" width="120" height="90" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="620" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e3a8a">1-bit ALU</text>
+  <text x="620" y="170" text-anchor="middle" font-size="12" fill="#1e40af">bit 31（MSB）</text>
+  <path d="M 520 210 L 545 210 L 545 240 L 620 240 L 620 210" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrR)"/>
+  <text x="570" y="232" text-anchor="middle" font-size="11" fill="#dc2626">Cin</text>
+
+  <!-- Result 输出 -->
+  <path d="M 120 210 L 120 300 L 620 300 L 620 210" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#arrGn)"/>
+  <text x="370" y="316" text-anchor="middle" font-size="12" fill="#16a34a">Result[31:0]（每一位的 Result 汇成 32 位结果）</text>
+
+  <!-- Cout31 -->
+  <path d="M 680 210 L 680 240 L 760 240" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrR)"/>
+  <text x="700" y="232" text-anchor="start" font-size="11" fill="#dc2626">Cout[31]</text>
+
+  <!-- Overflow XOR -->
+  <rect x="760" y="215" width="52" height="50" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="786" y="245" text-anchor="middle" font-size="15" font-weight="bold" fill="#78350f">⊕</text>
+  <path d="M 620 132 L 745 132 L 745 228 L 760 228" stroke="#9ca3af" stroke-width="1.8" fill="none" stroke-dasharray="5 4"/>
+  <text x="690" y="124" text-anchor="middle" font-size="11" fill="#9ca3af">Cin[31]</text>
+  <path d="M 812 240 L 856 240" stroke="#d97706" stroke-width="2" marker-end="url(#arrO)"/>
+  <text x="838" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">Overflow</text>
+
+  <!-- Zero NOR -->
+  <rect x="340" y="340" width="120" height="46" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="400" y="369" text-anchor="middle" font-size="14" font-weight="bold" fill="#78350f">NOR 全部位</text>
+  <path d="M 370 300 L 370 340" stroke="#16a34a" stroke-width="1.8"/>
+  <path d="M 430 300 L 430 340" stroke="#16a34a" stroke-width="1.8"/>
+  <path d="M 460 363 L 500 363" stroke="#d97706" stroke-width="2" marker-end="url(#arrO)"/>
+  <text x="480" y="352" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">Zero</text>
+  <text x="530" y="368" text-anchor="start" font-size="11" fill="#6b7280">只要有任何一位非 0，输出即 0</text>
+
+  <!-- slt 说明 -->
+  <rect x="60" y="404" width="780" height="52" rx="8" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="450" y="426" text-anchor="middle" font-size="13" fill="#111827">slt（有符号比较）：执行 A − B，取「Result[31] ⊕ Overflow」送入 bit 0 的 Less 输入，其余位 Less 置 0</text>
+  <text x="450" y="446" text-anchor="middle" font-size="12" fill="#6b7280">符号位要和溢出标志异或，才能在溢出的情况下仍给出正确的比较结果</text>
+
+  <defs>
+    <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrGn" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrO" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#d97706"/>
+    </marker>
+  </defs>
+</svg>

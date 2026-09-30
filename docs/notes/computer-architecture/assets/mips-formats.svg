@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="480" fill="#ffffff"/>
+  <text x="450" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">MIPS 三种指令格式（均为 32 位定长）</text>
+
+  <!-- R 型 -->
+  <text x="60" y="88" font-size="15" font-weight="bold" fill="#1d4ed8">R 型（寄存器-寄存器）</text>
+  <text x="60" y="108" font-size="12" fill="#6b7280">add rd, rs, rt / sub / and / or / slt</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="60"  y="122" width="120" height="44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <rect x="180" y="122" width="100" height="44" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <rect x="280" y="122" width="100" height="44" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <rect x="380" y="122" width="100" height="44" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="480" y="122" width="100" height="44" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+    <rect x="580" y="122" width="120" height="44" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="120" y="149" fill="#1e3a8a" font-weight="bold">op = 0</text>
+    <text x="230" y="149" fill="#5b21b6" font-weight="bold">rs</text>
+    <text x="330" y="149" fill="#5b21b6" font-weight="bold">rt</text>
+    <text x="430" y="149" fill="#92400e" font-weight="bold">rd</text>
+    <text x="530" y="149" fill="#374151" font-weight="bold">shamt</text>
+    <text x="640" y="149" fill="#166534" font-weight="bold">funct</text>
+  </g>
+  <g font-size="11" fill="#6b7280" text-anchor="middle">
+    <text x="120" y="182">31…26</text><text x="230" y="182">25…21</text><text x="330" y="182">20…16</text>
+    <text x="430" y="182">15…11</text><text x="530" y="182">10…6</text><text x="640" y="182">5…0</text>
+  </g>
+
+  <!-- I 型 -->
+  <text x="60" y="238" font-size="15" font-weight="bold" fill="#1d4ed8">I 型（立即数 / 访存 / 分支）</text>
+  <text x="60" y="258" font-size="12" fill="#6b7280">lw rt, imm(rs) / sw rt, imm(rs) / beq rs, rt, imm</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="60"  y="272" width="120" height="44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <rect x="180" y="272" width="100" height="44" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <rect x="280" y="272" width="100" height="44" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <rect x="380" y="272" width="320" height="44" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="120" y="299" fill="#1e3a8a" font-weight="bold">op</text>
+    <text x="230" y="299" fill="#5b21b6" font-weight="bold">rs</text>
+    <text x="330" y="299" fill="#5b21b6" font-weight="bold">rt</text>
+    <text x="540" y="299" fill="#7f1d1d" font-weight="bold">immediate（16 位，符号扩展）</text>
+  </g>
+  <g font-size="11" fill="#6b7280" text-anchor="middle">
+    <text x="120" y="332">31…26</text><text x="230" y="332">25…21</text><text x="330" y="332">20…16</text><text x="540" y="332">15…0</text>
+  </g>
+
+  <!-- J 型 -->
+  <text x="60" y="388" font-size="15" font-weight="bold" fill="#1d4ed8">J 型（跳转）</text>
+  <text x="60" y="408" font-size="12" fill="#6b7280">j target：目标地址 = (PC+4)[31:28] 拼接 26 位地址左移 2 位</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="60"  y="422" width="120" height="44" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <rect x="180" y="422" width="520" height="44" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+    <text x="120" y="449" fill="#1e3a8a" font-weight="bold">op</text>
+    <text x="440" y="449" fill="#92400e" font-weight="bold">address（26 位字地址）</text>
+  </g>
+
+  <!-- 右侧说明 -->
+  <rect x="730" y="122" width="150" height="300" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.2"/>
+  <text x="805" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">读图要点</text>
+  <text x="742" y="176" font-size="12" fill="#374151">• 三种格式共用</text>
+  <text x="742" y="196" font-size="12" fill="#374151">　前 6 位 op，硬件</text>
+  <text x="742" y="216" font-size="12" fill="#374151">　先看 op 再决定</text>
+  <text x="742" y="236" font-size="12" fill="#374151">　怎么切分后面 26 位</text>
+  <text x="742" y="268" font-size="12" fill="#374151">• 寄存器编号 5 位，</text>
+  <text x="742" y="288" font-size="12" fill="#374151">　恰好编址 32 个</text>
+  <text x="742" y="308" font-size="12" fill="#374151">　通用寄存器</text>
+  <text x="742" y="340" font-size="12" fill="#374151">• R 型再看 funct</text>
+  <text x="742" y="360" font-size="12" fill="#374151">　区分 add/sub/…</text>
+  <text x="742" y="392" font-size="12" fill="#374151">• 立即数 16 位，</text>
+  <text x="742" y="412" font-size="12" fill="#374151">　访存偏移需先</text>
+  <text x="742" y="432" font-size="12" fill="#374151">　符号扩展到 32 位</text>
+</svg>

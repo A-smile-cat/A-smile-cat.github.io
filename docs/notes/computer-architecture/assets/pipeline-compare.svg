@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">从单周期到流水线：同样的五个阶段，三种组织方式</text>
+
+  <!-- 单周期 -->
+  <text x="50" y="72" font-size="14" font-weight="bold" fill="#374151">单周期：一条指令占满一整个长周期（周期按最慢的 lw 设计）</text>
+  <g>
+    <rect x="50" y="84" width="800" height="34" fill="#fde68a" stroke="#d97706" stroke-width="1.2"/>
+    <text x="450" y="106" text-anchor="middle" font-size="13" fill="#78350f">指令 i（一个很长的时钟周期，短指令的后半段全部闲置）</text>
+    <rect x="50" y="118" width="800" height="34" fill="#fde68a" stroke="#d97706" stroke-width="1.2"/>
+    <text x="450" y="140" text-anchor="middle" font-size="13" fill="#78350f">指令 i+1</text>
+  </g>
+
+  <!-- 多周期 -->
+  <text x="50" y="196" font-size="14" font-weight="bold" fill="#374151">多周期：拆成多个短周期，部件可复用，但同一时刻只有一条指令在推进</text>
+  <g font-size="11" text-anchor="middle">
+    <rect x="50"  y="208" width="120" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="110" y="230" fill="#1e3a8a">取指</text>
+    <rect x="170" y="208" width="120" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="230" y="230" fill="#1e3a8a">译码/读寄存器</text>
+    <rect x="290" y="208" width="120" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="350" y="230" fill="#1e3a8a">执行</text>
+    <rect x="410" y="208" width="120" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="470" y="230" fill="#1e3a8a">访存</text>
+    <rect x="530" y="208" width="120" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="590" y="230" fill="#1e3a8a">写回</text>
+    <rect x="650" y="208" width="200" height="34" fill="#f3f4f6" stroke="#9ca3af"/><text x="750" y="230" fill="#6b7280">下一指令才开始取指</text>
+  </g>
+
+  <!-- 流水线 -->
+  <text x="50" y="290" font-size="14" font-weight="bold" fill="#374151">流水线：五条指令重叠推进，理想情况下每个周期都能完成一条</text>
+  <g font-size="11" text-anchor="middle">
+    <text x="72"  y="322" fill="#6b7280">周期→</text>
+    <!-- 行标 -->
+    <text x="28" y="352" font-size="11" fill="#374151">i</text>
+    <text x="28" y="382" font-size="11" fill="#374151">i+1</text>
+    <text x="28" y="412" font-size="11" fill="#374151">i+2</text>
+    <text x="28" y="442" font-size="11" fill="#374151">i+3</text>
+    <text x="28" y="472" font-size="11" fill="#374151">i+4</text>
+    <!-- 网格 -->
+    <rect x="50"  y="330" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="105" y="350" fill="#1e3a8a">IF</text>
+    <rect x="160" y="330" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="215" y="350" fill="#1e3a8a">ID</text>
+    <rect x="270" y="330" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="325" y="350" fill="#1e3a8a">EX</text>
+    <rect x="380" y="330" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="435" y="350" fill="#1e3a8a">MEM</text>
+    <rect x="490" y="330" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="545" y="350" fill="#1e3a8a">WB</text>
+    <rect x="160" y="360" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="215" y="380" fill="#1e3a8a">IF</text>
+    <rect x="270" y="360" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="325" y="380" fill="#1e3a8a">ID</text>
+    <rect x="380" y="360" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="435" y="380" fill="#1e3a8a">EX</text>
+    <rect x="490" y="360" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="545" y="380" fill="#1e3a8a">MEM</text>
+    <rect x="600" y="360" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="655" y="380" fill="#1e3a8a">WB</text>
+    <rect x="270" y="390" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="325" y="410" fill="#1e3a8a">IF</text>
+    <rect x="380" y="390" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="435" y="410" fill="#1e3a8a">ID</text>
+    <rect x="490" y="390" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="545" y="410" fill="#1e3a8a">EX</text>
+    <rect x="600" y="390" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="655" y="410" fill="#1e3a8a">MEM</text>
+    <rect x="710" y="390" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="765" y="410" fill="#1e3a8a">WB</text>
+    <rect x="380" y="420" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="435" y="440" fill="#1e3a8a">IF</text>
+    <rect x="490" y="420" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="545" y="440" fill="#1e3a8a">ID</text>
+    <rect x="600" y="420" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="655" y="440" fill="#1e3a8a">EX</text>
+    <rect x="710" y="420" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="765" y="440" fill="#1e3a8a">MEM</text>
+    <rect x="820" y="420" width="60"  height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="850" y="440" fill="#1e3a8a">WB</text>
+    <rect x="490" y="450" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="545" y="470" fill="#1e3a8a">IF</text>
+    <rect x="600" y="450" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="655" y="470" fill="#1e3a8a">ID</text>
+    <rect x="710" y="450" width="110" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="765" y="470" fill="#1e3a8a">EX</text>
+    <rect x="820" y="450" width="60"  height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="850" y="470" fill="#1e3a8a">MEM</text>
+  </g>
+
+  <!-- 结论 -->
+  <rect x="50" y="500" width="800" height="44" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="450" y="528" text-anchor="middle" font-size="14" fill="#166534">流水线没有让单条指令变快，它提高的是吞吐率、并行度与部件利用率 —— 前提是处理好三类相关（冒险）</text>
+</svg>

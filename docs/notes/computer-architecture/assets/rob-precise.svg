@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">重排序缓冲区（ROB）：乱序执行、按序提交</text>
+  <text x="450" y="56" text-anchor="middle" font-size="13" fill="#6b7280">精确异常的关键：异常在「退休」点被发现时，架构状态与程序顺序严格一致</text>
+
+  <!-- 精确异常定义 -->
+  <rect x="50" y="76" width="800" height="72" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="70" y="102" font-size="13.5" font-weight="bold" fill="#1e3a8a">精确异常的两个条件：</text>
+  <text x="70" y="126" font-size="13" fill="#1e40af">① 引起异常的指令之前的所有指令都已完成并修改架构状态（retired）　② 之后的任何指令都没有修改架构状态</text>
+  <text x="70" y="142" font-size="11.5" fill="#6b7280">Retire = Commit = 完成执行并更新架构状态。乱序完成本身没关系，只要「生效」是按序的。</text>
+
+  <!-- 流水线示意 -->
+  <text x="50" y="188" font-size="14" font-weight="bold" fill="#374151">带 ROB 的流水线：F → D → E（乱序）→ R（写 ROB）→ W（按序退休）</text>
+  <g font-size="11" text-anchor="middle">
+    <text x="40" y="222" font-size="11" fill="#374151">i（快）</text>
+    <rect x="70"  y="200" width="90" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="115" y="220">F</text>
+    <rect x="160" y="200" width="90" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="205" y="220">D</text>
+    <rect x="250" y="200" width="90" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="295" y="220">E</text>
+    <rect x="340" y="200" width="90" height="30" fill="#fde68a" stroke="#d97706"/><text x="385" y="220">R</text>
+    <rect x="430" y="200" width="90" height="30" fill="#fde68a" stroke="#d97706"/><text x="475" y="220">W</text>
+    <text x="40" y="262" font-size="11" fill="#374151">j（慢）</text>
+    <rect x="160" y="240" width="90" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="205" y="260">F</text>
+    <rect x="250" y="240" width="90" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="295" y="260">D</text>
+    <rect x="340" y="240" width="180" height="30" fill="#bfdbfe" stroke="#2563eb"/><text x="430" y="260">E × 2（还在执行）</text>
+    <rect x="520" y="240" width="90" height="30" fill="#fde68a" stroke="#d97706"/><text x="565" y="260">R</text>
+    <rect x="610" y="240" width="90" height="30" fill="#fde68a" stroke="#d97706"/><text x="655" y="260">W</text>
+  </g>
+  <text x="540" y="196" font-size="12" fill="#92400e">i 先算完也只能在 ROB 里等；j 没提交，i 就不能跳过 j 单独退休</text>
+  <path d="M 430 230 L 430 240" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- ROB 环形缓冲 -->
+  <text x="50" y="322" font-size="14" font-weight="bold" fill="#374151">ROB 是一个环形缓冲区：队头 = 最老指令（退休口），队尾 = 最新指令（分配口）</text>
+  <g>
+    <rect x="130" y="360" width="640" height="90" rx="10" fill="#f9fafb" stroke="#9ca3af" stroke-width="2"/>
+    <!-- entries -->
+    <g font-size="11" text-anchor="middle">
+      <rect x="150" y="378" width="90" height="54" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="195" y="400" fill="#7f1d1d" font-weight="bold">head</text>
+      <text x="195" y="420" fill="#7f1d1d">最老，待退休</text>
+      <rect x="250" y="378" width="90" height="54" fill="#fde68a" stroke="#d97706"/>
+      <text x="295" y="410" fill="#92400e">完成✓待按序</text>
+      <rect x="350" y="378" width="90" height="54" fill="#fde68a" stroke="#d97706"/>
+      <text x="395" y="410" fill="#92400e">完成✓待按序</text>
+      <rect x="450" y="378" width="90" height="54" fill="#dbeafe" stroke="#2563eb"/>
+      <text x="495" y="410" fill="#1e3a8a">执行中</text>
+      <rect x="550" y="378" width="90" height="54" fill="#dbeafe" stroke="#2563eb"/>
+      <text x="595" y="410" fill="#1e3a8a">执行中</text>
+      <rect x="650" y="378" width="100" height="54" fill="#f3f4f6" stroke="#9ca3af"/>
+      <text x="700" y="400" fill="#374151" font-weight="bold">tail</text>
+      <text x="700" y="420" fill="#374151">最新分配</text>
+    </g>
+    <path d="M 130 405 L 130 405" stroke="none"/>
+    <text x="195" y="472" text-anchor="middle" font-size="11.5" fill="#dc2626">← 退休方向（严格按程序顺序）　　分配方向 →（按序进入）</text>
+  </g>
+  <g font-size="11.5" fill="#374151">
+    <text x="50" y="500">ROB 表项内容：指令 PC · 目标寄存器 ID 与值 · 目标存储地址与值（store 用）· 异常标志 · 有效位 / 完成位</text>
+    <text x="50" y="522"> retirement 时先查异常标志：无异常 → 把结果写入架构寄存器堆或存储器；有异常 → 冲刷所有更年轻的指令，转异常处理入口</text>
+  </g>
+
+  <!-- Tomasulo+ROB -->
+  <rect x="50" y="540" width="800" height="62" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="70" y="564" font-size="13" font-weight="bold" fill="#166534">Tomasulo + ROB 的改造点：</text>
+  <text x="70" y="586" font-size="12.5" fill="#166534">CDB 不再直通寄存器堆，而是先写 ROB；寄存器堆只在退休时按序更新 —— 于是乱序的「结果」与按序的「生效」被彻底解耦，异常自然精确</text>
+</svg>

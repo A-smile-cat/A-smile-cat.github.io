@@ -98,7 +98,23 @@ export default defineUserConfig({
             "/navigation/maintenance-guide.md",
           ],
         },
-        { text: "学习笔记", link: "/notes/" },
+        {
+          text: "学习笔记",
+          link: "/notes/",
+          collapsible: true,
+          children: [
+            {
+              text: "计算机体系结构",
+              collapsible: true,
+              children: [
+                "/notes/computer-architecture/l01-overview-and-foundations.md",
+                "/notes/computer-architecture/l02-single-cycle-datapath.md",
+                "/notes/computer-architecture/l03-pipeline-and-scoreboarding.md",
+                "/notes/computer-architecture/l04-tomasulo-rob-rename.md",
+              ],
+            },
+          ],
+        },
         {
           text: "计算机知识库",
           link: "/blog/",
@@ -230,6 +246,7 @@ export default defineUserConfig({
         exclude: [
           /^\/research\/(vla|data-extract)\//,
           /^\/research\/(科研基础|%E7%A7%91%E7%A0%94%E5%9F%BA%E7%A1%80)\//,
+          /^\/notes\/computer-architecture\//,
         ],
       },
       // 贡献者列表来自 git 提交记录，而提交里带有 AI 协作署名
