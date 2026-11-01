@@ -341,6 +341,9 @@ const startAvatarCarousel = (): (() => void) | null => {
     ),
   ];
   if (!imgs.length) return null;
+  // 主题 DropTransition 的 appear 动画期间不能替换节点，否则会打断
+  // Vue 的 transition 流程，把元素永久留在 opacity: 0 的初始态
+  if (!imgs.every(isTransitionSettled)) return null;
   if (imgs[0].dataset.carousel) return () => {};
   imgs.forEach((img) => (img.dataset.carousel = "init"));
 
@@ -383,6 +386,16 @@ const startAvatarCarousel = (): (() => void) | null => {
 };
 
 /**
+ * 元素是否已脱离主题 DropTransition 的 appear 动画：
+ * transition class 被清理，且 unsetStyle 已把内联 opacity 恢复为 1。
+ * 满足后才能安全地对这些 Vue 管理的节点做替换/搬移。
+ */
+const isTransitionSettled = (el: Element): boolean =>
+  !el.classList.contains("drop-enter-active") &&
+  !el.classList.contains("drop-enter-from") &&
+  (el as HTMLElement).style.opacity === "1";
+
+/**
  * 主页布局重排：把页面级的「关于我」正文（.theme-hope-content）
  * 搬进主栏 main，替换被隐藏的文章列表，让主题原有 flex 布局
  * 自然呈现「左正文 + 右信息卡」。
@@ -394,6 +407,8 @@ const relocateHomeContent = (): boolean => {
     ":scope > .theme-hope-content"
   );
   if (!main || !content) return false;
+  // 同上：appear 动画未结束前搬移节点会打断 Vue transition
+  if (!isTransitionSettled(content)) return false;
   if (content.parentElement !== main) main.appendChild(content);
   return true;
 };
@@ -420,7 +435,9 @@ export default defineClientConfig({
 
       let attempts = 0;
       retryTimer = window.setInterval(() => {
-        if (++attempts > 25) {
+        // dev 模式首次访问时页面 chunk 编译可能超过 5s，放宽到 30s；
+        // 生产环境资源本地加载，通常 1s 内三项全部就绪后即提前停止
+        if (++attempts > 150) {
           window.clearInterval(retryTimer);
           return;
         }
