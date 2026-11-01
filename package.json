@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "check:sidebar": "node scripts/check-sidebar.mjs",
+    "docs:build": "npm run check:sidebar && vuepress build docs"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.18",
