@@ -81,14 +81,16 @@ export default defineUserConfig({
     // - 一级分组顺序与 navbar 保持一致
     // - 只保留「一级分组 + 其下的实际页面/子分组」两层，不再有中间的包装分组；
     //   一级分组下只有一个同名同链接页面时，直接退化为普通链接（不再可展开）
-    // - 「有子项的分组」不配 link：点击标题只展开/折叠，不跳转到目录页（这类目录页已由
-    //   plugins.catalog.exclude 排除，不再生成）
+    // - 「有子项的分组」不配 link：分组标题同时渲染成 <a> 与折叠按钮时，点击会
+    //   既触发跳转又触发折叠切换，SPA 导航后展开状态被重置，表现为「点不开」；
+    //   栏目落地页（/notes/ 等目录的 README）仍存在，由顶部导航栏直达
+    // - 二级分组同样不配 link：对应目录页已由 plugins.catalog.exclude 排除，不再生成
     // - 可展开分组加 collapsible: true（否则 theme-hope 渲染成不可折叠的 <p>，永远全展开）
     // - 分组不配 expanded，默认收起，只显示顶层；点击标题展开/收起，进入某栏目时该分组自动展开
+    //   （theme-hope 按 children 是否包含当前路由判定 active，不依赖分组自身 link）
     sidebar: [
         {
           text: "快捷导航",
-          link: "/navigation/",
           collapsible: true,
           children: [
             "/navigation/study.md",
@@ -100,7 +102,6 @@ export default defineUserConfig({
         },
         {
           text: "学习笔记",
-          link: "/notes/",
           collapsible: true,
           children: [
             {
@@ -113,11 +114,19 @@ export default defineUserConfig({
                 "/notes/computer-architecture/l04-tomasulo-rob-rename.md",
               ],
             },
+            {
+              text: "Python",
+              collapsible: true,
+              children: [
+                "/notes/python/01-env-setup-basics.md",
+                "/notes/python/02-code-style-and-ide.md",
+                "/notes/python/venv-vs-conda-guide.md",
+              ],
+            },
           ],
         },
         {
           text: "计算机知识库",
-          link: "/blog/",
           collapsible: true,
           children: [
             "/blog/从零到一：用书签管理器掌握 HTML CSS JS 三件套.md",
@@ -126,16 +135,20 @@ export default defineUserConfig({
         },
         {
           text: "AI 技术专栏",
-          link: "/ai-tech/",
           collapsible: true,
           children: [
             "/ai-tech/VLA与具身智能入门笔记.md",
           ],
         },
-        { text: "AI 应用技术专栏", link: "/ai-app/" },
+        {
+          text: "AI 应用技术专栏",
+          collapsible: true,
+          children: [
+            "/ai-app/llm-app-intro.md",
+          ],
+        },
         {
           text: "研究中心",
-          link: "/research/",
           collapsible: true,
           children: [
             {
@@ -170,7 +183,6 @@ export default defineUserConfig({
         },
         {
           text: "使用指南",
-          link: "/guide/",
           collapsible: true,
           children: [
             "/guide/github-pages-deploy.md",
@@ -179,7 +191,6 @@ export default defineUserConfig({
         },
         {
           text: "娱乐场",
-          link: "/entertainment/",
           collapsible: true,
           children: [
             "/entertainment/enter1.md",
