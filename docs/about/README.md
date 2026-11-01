@@ -13,7 +13,7 @@ dir:
 
 - [GitHub](https://github.com/A-smile-cat)
 
-- [![WeChat](https://img.shields.io/badge/微信公众号-程序喵有话说-brightgreen)](Contact%20the%20author.md)
+- [![WeChat](https://img.shields.io/badge/微信公众号-程序喵有话说-brightgreen)](./picture/author-wx.png)
 
 ![author-wx](./picture/author-wx.png)
 
